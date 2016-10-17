@@ -1,0 +1,21 @@
+<% title "Searches" %>
+
+<table>
+  <tr>
+    <th>Term</th>
+    <th>Count</th>
+    <th>Hits</th>
+  </tr>
+  <% for search in @searches %>
+    <tr>
+      <td><%=h search.term %></td>
+      <td><%=h search.count %></td>
+      <td><%=h search.hits %></td>
+      <td><%= link_to "Show", search %></td>
+      <td><%= link_to "Edit", edit_search_path(search) %></td>
+      <td><%= link_to "Destroy", search, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Search", new_search_path %></p>

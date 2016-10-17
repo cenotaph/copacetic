@@ -1,0 +1,39 @@
+%div{:style => 'float: left; margin-bottom: 20px'}
+  - if items.blank?
+    No results.
+  - else
+    All
+    = items.first.class.to_s.pluralize
+  %span.small_link= link_to '(options)', "javascript:$('.filters').slideToggle();"
+= paginate items, :remote => true
+.filters{:style => ( (params[:by_special].blank? && params[:by_serial].blank? && params[:by_label].blank? && params[:by_creator].blank? && params[:by_publisher].blank?) ?   "display: none" : "")}
+  .six.columns
+    Category:
+    = collection_select :item, :by_special, @specials, :id, :name, {:include_blank => true, :selected => params[:by_special]}, { :onchange => "document.location.href=document.location.href.substr(0,document.location.href.indexOf('?')) + '?by_special=' + $(this).val() + '&by_serial=#{params[:by_serial]}&by_publisher=#{params[:by_publisher]}'"}
+    / expenses?incometab=1&by_budgetarea=" + params[:by_budgetarea].to_s + "&by_location=" + params[:by_location].to_s + "&by_payer=" + params[:by_payer].to_s + "&by_recipient=" + params[:by_recipient].to_s + "&by_month=" + params[:by_month].to_s + "&i_budgetarea=" + params[:i_budgetarea].to_s + "&i_location=" + params[:i_location].to_s + "&i_source=" + params[:i_source].to_s + "&i_month=' +  $(this).val()"  
+
+    - if items.first.class == Comic
+      Series:
+      = collection_select :item, :by_serial, Serial.all, :id, :display_title,{:include_blank => true, :selected => params[:by_serial]}, {:onchange => "document.location.href=document.location.href.substr(0,document.location.href.indexOf('?')) + '?by_serial=' + $(this).val() + '&by_special=#{params[:by_special]}&by_publisher=#{params[:by_publisher]}'"}
+  
+  .six.columns
+    - if controller.controller_name != "cds"
+      Publisher
+      = collection_select :item, :by_publisher, @publishers, :id, :display_title, { :include_blank => true, :selected => params[:by_publisher] }, {:onchange => raw("document.location.href=document.location.href.substr(0,document.location.href.indexOf('?')) + '?by_publisher=' + $(this).val() + '&by_special=#{params[:by_special]}&by_serial=#{params[:by_serial]}'") }
+  
+    - else
+      Label
+      = collection_select :item, :label_filter, Label.all, :id, :display_title,  { :include_blank => true, :selected => params[:by_label] }, {:onchange => raw("document.location.href=document.location.href.substr(0,document.location.href.indexOf('?')) + '?by_label=' + $(this).val() + '&by_special=#{params[:by_special]}'") }
+  
+    = (controller.controller_name == 'dvds' ? 'Director' : 'Creator')
+    name
+    = form_tag('/' + controller.controller_name, :id => 'creator_mask', :method => :get) do 
+      - if controller.controller_name == 'dvds'
+        = autocomplete_field_tag 'by_director', params[:by_director], autocomplete_director_firstname_admin_dvds_path, :size => 75
+      - else
+        = autocomplete_field_tag 'by_creator', params[:by_creator], autocomplete_creator_firstname_admin_comics_path, :size => 75
+
+:javascript
+  $("form#creator_mask").submit(function() {
+    $("form#creator_mask").append($("<input>", attr("type", "hidden").value($("#item_by_publisher").val())));
+  });

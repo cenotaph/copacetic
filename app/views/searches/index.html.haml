@@ -1,0 +1,15 @@
+- title "Searches"
+%table
+  %tr
+    %th Term
+    %th Count
+    %th Hits
+  - for search in @searches
+    %tr
+      %td= h search.term
+      %td= h search.count
+      %td= h search.hits
+      %td= link_to "Show", search
+      %td= link_to "Edit", edit_search_path(search)
+      %td= link_to "Destroy", search, :confirm => 'Are you sure?', :method => :delete
+%p= link_to "New Search", new_search_path

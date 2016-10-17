@@ -1,0 +1,3 @@
+%ul
+  - for c in @directors
+    %li= link_to(c['fullname'], {:action => 'dir', :id => c.id})

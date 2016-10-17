@@ -1,0 +1,12 @@
+<h1>Editing dvd</h1>
+
+
+<% form_for(@dvd, :url => dvd_path(@dvd), :html => { :method => :put,
+  :name => "newitem",  :multipart=> true  }) do %>
+	<%= render :partial => 'layouts/editform', :locals => {:itemtype => 'dvd', :item => @dvd } %>
+<% end %>
+
+
+
+<%= link_to 'Show', :action => 'show', :id => @dvd %> |
+<%= link_to 'Back', :action => 'list' %>

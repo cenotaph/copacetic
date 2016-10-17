@@ -1,0 +1,35 @@
+
+- if items.size > 4
+  - items.each_with_index do |item, index|
+    .index_grid{:style => ( (index  % 4 == 0) ? "clear: left;" : "" ) + "display: block"}
+      = link_to(item) do
+        .index_image= image_tag item.image.url(:index)
+      .index_title= link_to highlight(item.display_title, params[:query]), item
+      .index_author= raw highlight(item.authorship_short, params[:query])
+      .price= copacetic_price(item)
+
+- elsif items.size == 1
+  - items.each do |item|
+    = link_to (item) do
+      .index_image= image_tag item.image.url(:index)
+    .index_metadata.wide
+      .index_title= link_to highlight(item.display_title, params[:query]), item
+      .index_author= raw highlight(item.authorship_short, params[:query])
+      .price= copacetic_price(item)
+      .index_description= raw highlight(sanitize(get_description(item, :full), :tags => []), params[:query])
+
+- else          
+  - items.each_with_index do |item, index|
+    .large_grid{:style =>"clear: left;" }
+      = link_to(item) do
+        .index_image= image_tag item.image.url(:index)
+      .index_metadata.wide
+        .index_title= link_to highlight(item.display_title, params[:query]), item
+        .index_author= raw highlight(item.authorship_short, params[:query])
+        .price= copacetic_price(item)
+        .index_description= raw highlight(sanitize(get_description(item, :short), :tags => []), params[:query])
+        
+:javascript
+  $('.pagination a').on('click', function(e) {
+    $('#paginator').html("<center><img src=\"/images/horizontal-loader.gif\"></center>");
+  });

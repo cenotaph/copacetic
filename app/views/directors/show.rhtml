@@ -1,0 +1,8 @@
+<% for column in Director.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @director.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @director %> |
+<%= link_to 'Back', :action => 'list' %>

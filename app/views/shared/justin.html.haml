@@ -1,0 +1,17 @@
+%h2= "Just in for #{@arrived.name}"
+
+%p
+  Here what's new at Copacetic for
+  = @arrived.name
+  = ".  You can also look back at our previous "
+  "JUST IN" announcements.
+
+= form_tag ({:action => 'justin'}) do
+  View previous updates:
+  = collection_select("admin", "update_id", Update.published.order('day DESC'), :id, :name,  options ={:prompt => 'View a previous update ...'}, html_options ={:onchange => "javascript:document.location.href='/admin/justin/'+this.value"} )
+  
+= render :partial => 'multifields'   
+  
+= form_tag ({:action => 'justin'}) do
+  View previous updates:
+  = collection_select("admin", "update_id", Update.published.order('day DESC'), :id, :name,  options ={:prompt => 'View a previous update ...'}, html_options ={:onchange => "javascript:document.location.href='/admin/justin/'+this.value"} )  

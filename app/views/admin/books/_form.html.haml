@@ -1,0 +1,45 @@
+= semantic_nested_form_for [:admin, @book], :html => {:multipart => true} do |f|
+
+  =  f.inputs "Name and categories" do
+    = f.input :title
+    = f.input :publisher
+    = f.input :specials,  :as => :check_boxes
+    = f.input :include_front_grid, :as => :boolean,  :label => 'Show in front grid'   , :input_html => {:checked => @book.in_front_grid}    
+    .hide_show= link_to 'Toggle hide/show specials', '#', :onclick => 'javascript:$("#book_specials_input ol.choices-group").toggle();'
+    = f.input :fiction
+    = f.input :hardcover
+  = f.inputs "Creators", :class => "half inputs" do
+    = f.fields_for :creators do |ff|
+      - if ff.object.new_record? && !ff.options[:child_index].nil?
+        = ff.input :firstname, :as => :autocomplete, :url => autocomplete_creator_firstname_admin_books_path, :input_html => {:update_elements => { :firstname => '#book_creators_attributes_' + ff.options[:child_index] + '_firstname', :lastname => '#book_creators_attributes_' + ff.options[:child_index] + '_lastname' }}
+      - else
+        = ff.input :firstname
+      = ff.input :lastname
+      = ff.link_to_remove 'remove this creator'   
+    = f.link_to_add 'add creator', :creators
+  = f.inputs "Image", :class => "half inputs" do
+    - if f.object.image?
+      = image_tag f.object.image.url(:frontgrid)
+      = f.check_box :remove_image
+      Delete image
+    = f.input :image, :label => (f.object.image? ? 'Change image' : 'Choose image')
+  = f.inputs "Descriptions (at least one is mandatory)", :class => "full inputs" do
+    = f.input :tinydesc, :label => 'Tiny brief'
+    .hide_show= link_to 'Toggle hide/show short description', 'javascript:$("#shortdesc").toggle();'
+    %h4 Short description
+    #shortdesc{:style => (@book.shortdesc.blank? ? 'display: hidden' : 'display: block')}= f.cktext_area :shortdesc
+    .hide_show= link_to 'Toggle hide/show full description', 'javascript:$("#description").toggle();'       
+    %h4 Full description
+    #description= f.cktext_area :description
+  = f.inputs "Minutiae", :class => "half inputs" do
+    = f.input :pagecount
+    = f.input :weight
+    = f.input :isbn
+    = f.input :ean
+  = f.inputs "Details", :class => "half inputs" do
+    = f.input :listprice
+    = f.input :price
+    = f.input :instock
+    = f.input :justin, :as => :select, :collection => Justin.all.sort{|x, y| y.day <=> x.day }
+    = f.actions do 
+      = f.submit "Save"

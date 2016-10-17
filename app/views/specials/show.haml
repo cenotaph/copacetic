@@ -1,0 +1,6 @@
+.pagetitle= @special.name
+
+- unless @special.description.blank?
+  .head_description= @special.description
+
+= render :partial => 'admin/multifields'

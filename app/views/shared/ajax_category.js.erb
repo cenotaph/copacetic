@@ -1,0 +1,5 @@
+$('#index_grid').html('<%= escape_javascript render(:partial => "shared/category_grid", :locals => {:items => @items}) %>');
+$('.paginator').html('<%= escape_javascript(render(:partial => "shared/paginator", :locals => {:items => @items })) %>');
+$('.pagination a').on('click', function(e) {
+    $('.paginator').html("<center><img src=\"/images/horizontal-loader.gif\"></center>");
+});

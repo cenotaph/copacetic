@@ -1,0 +1,36 @@
+= semantic_nested_form_for [:admin, @cd], :html => {:multipart => true} do |f|
+
+  =  f.inputs "Name and categories" do
+    = f.input :artist
+    = f.input :title
+    = f.input :label
+    = f.input :specials,  :as => :check_boxes
+    = f.input :include_front_grid, :as => :boolean,  :label => 'Show in front grid'   , :input_html => {:checked => @cd.in_front_grid}
+    .hide_show= link_to 'Toggle hide/show specials', '#', :onclick => 'javascript:$("#comic_specials_input ol.choices-group").toggle();'
+  = f.inputs "Keywords", :class => "half inputs" do
+    = f.input :keywords
+  = f.inputs "Image", :class => "half inputs" do
+    - if f.object.image?
+      = image_tag f.object.image.url(:frontgrid)
+      = f.check_box :remove_image
+      Delete image
+    = f.input :image, :label => (f.object.image? ? 'Change image' : 'Choose image')
+  = f.inputs "Descriptions (at least one is mandatory)", :class => "full inputs" do
+    = f.input :tinydesc, :label => 'Tiny brief'
+    .hide_show= link_to 'Toggle hide/show short description', 'javascript:$("#shortdesc").toggle();'
+    %h4 Short description
+    #shortdesc{:style => (@cd.shortdesc.blank? ? 'display: hidden' : 'display: block')}= f.cktext_area :shortdesc
+    .hide_show= link_to 'Toggle hide/show full description', 'javascript:$("#description").toggle();'       
+    %h4 Full description
+    #description= f.cktext_area :description
+  = f.inputs "Minutiae", :class => "half inputs" do
+    = f.input :numofdiscs
+    = f.input :catno
+    = f.input :weight
+  = f.inputs "Details", :class => "half inputs" do
+    = f.input :listprice
+    = f.input :price
+    = f.input :instock
+    = f.input :justin_id, :as => :select, :collection => Justin.all.sort{|x, y| y.day <=> x.day }
+    = f.actions do 
+      = f.submit "Save"

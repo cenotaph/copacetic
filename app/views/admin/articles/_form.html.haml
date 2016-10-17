@@ -1,0 +1,12 @@
+= semantic_form_for([:admin, @article], :html => {:multipart => true}) do |f|
+  = f.input :title
+  %p Full article text
+  = f.cktext_area :content
+  %p Short blurb (will display in sidebar for 'about us')
+  = f.cktext_area :blurb
+  = f.input :sortorder, :label => "Sort order (can be decimal)"
+  = f.input :published
+  = f.input :in_universe, :label => "Show in Copacetic Universe"
+  = f.input :quotidian, :label => "Consider this to be quotidian"
+  = f.actions do 
+    = f.submit "Save"

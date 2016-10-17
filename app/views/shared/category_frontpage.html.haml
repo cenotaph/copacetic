@@ -1,0 +1,46 @@
+.browse_title
+  = link_to image_tag('/images/left.png', :border => 0), '#', :id => 'prev'
+
+  Featured 
+  - if @items.blank?
+    = controller.controller_name.singularize.humanize
+  - else
+    = @items.first.class.to_s.pluralize
+  = link_to image_tag('/images/right.png', :border => 0), '#', :id => 'next'
+
+#featured_scroll.thirteen.columns
+  - @featured.in_groups_of(3) do |group|
+    - next unless group.size == 3
+    .groupslide
+      - group.each_with_index do |featured, index|
+        - next if featured.nil?
+        = link_to (featured) do
+          .index_featured.four.columns{:class => ((index % 3 == 0) ? 'alpha' : 'omega'), :style => ((index % 3 == 0) ? 'clear: left; border-right: 1px dotted #3bbfce;' : ((index % 2 == 0 ) ? 'padding-left: 10px; ' : 'border-right: 1px dotted #3bbfce;'  ))  }
+            .index_image= image_tag featured.image.url(:index)
+            .index_metadata
+              .index_title= raw featured.display_title
+              .index_author= raw featured.authorship_short
+              .index_price= number_to_currency(featured.price)
+              .index_description= raw truncate_html(get_description(featured, :tiny), :length => 230)
+
+
+.browse_title.paginator= render :partial => 'shared/paginator', :locals => {:items => @items}
+
+#index_grid= render :partial => 'shared/category_grid', :locals => {:items => @items}
+.paginator= paginate @items, :remote => true
+
+:javascript
+  $('.pagination a').on('click', function(e) {
+    $('.paginator').html("<center><img src=\"/images/horizontal-loader.gif\"></center>");
+  });
+  $('#featured_scroll').cycle({ 
+    fx:     'scrollHorz', 
+    prev:   '#prev', 
+    next:   '#next', 
+    timeout: 7000 
+  });
+- unless params[:by_special].blank? && params[:by_serial].blank? && params[:by_label].blank? && params[:by_creator].blank? && params[:by_publisher].blank?
+  :javascript
+    $('html, body').animate({
+      scrollTop: $(".index_grid").offset().top
+    }, 2000);

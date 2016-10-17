@@ -1,0 +1,13 @@
+<%= error_messages_for 'creator' %>
+
+<!--[form:creator]-->
+<p><label for="creator_firstname">Firstname</label><br/>
+<%= text_field 'creator', 'firstname'  %></p>
+
+<p><label for="creator_lastname">Lastname</label><br/>
+<%= text_field 'creator', 'lastname'  %></p>
+
+<p><label for="creator_description">Description</label><br/>
+<%= text_area 'creator', 'description', :size => "40x10", :class => 'mceEditor'  %></p>
+<!--[eoform:creator]-->
+

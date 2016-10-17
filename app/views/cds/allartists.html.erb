@@ -1,0 +1,5 @@
+<ul>
+<% for c in @artists %>
+ <li><%= link_to(c['artist'], {:action => 'art', :id => c['artist']}) %></li>
+<% end %>
+</ul>

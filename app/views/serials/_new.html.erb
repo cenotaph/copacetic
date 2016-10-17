@@ -1,0 +1,8 @@
+Quick form: 
+</form>
+<% form_remote_tag :url => {:controller => '/serials', :action => 'quickcreate'},
+			:html => {:action => {:controller => '/serials', :action => 'quickcreate'}}, :update => 'serialsedit'  do %>
+
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create w/ajax" %>
+<% end %>

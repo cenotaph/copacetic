@@ -1,0 +1,3 @@
+%ul.autocomplete_list
+  - for c in @publishersearch.to_a
+    %li.autocomplete_item{:id => c.id}= c.name

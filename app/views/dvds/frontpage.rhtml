@@ -1,0 +1,41 @@
+<font size="+3">DVDS</font>
+<br />
+
+
+<%= render :partial => 'layouts/featured', :locals =>  {:featured => @featured, :itemtype => 'dvd' }%>
+
+
+<table class="frontpage">
+<tr>
+	<td class="frontpage">
+Browse by publisher:<br />
+<ul>
+<% for p in @publishers 
+	next if (p.name == 'UNDEFINED') %>
+<li><%= link_to(p.name, {:controller => 'dvds', :action => 'pub', :id => p.id}) %></li>
+<% end %>
+</ul></td>
+<td class="frontpage">
+
+Browse popular directors:<br />
+<ul>
+<% for c in @directors %>
+  <li><%= link_to(c['fullname'], {:controller => 'dvds', :action => 'dir', :id => c.id}) %></li>
+<% end %>
+</ul>
+<%= link_to('See all directors ...', {:controller => 'dvds', :action => 'alldirectors', :id => :all}) %>
+</td>
+
+<% if (@specials.length > 0) %>
+<td class="frontpage">Browse by category:<br />
+
+	<ul>
+		<% for s in @specials %>
+		<li><%= link_to(s['name'], {:controller => 'dvds', :action => 'cat', :id => s.id} ) %></li>
+		<% end %>
+	</ul>
+</td><% end %>
+</tr>
+</table>
+<br />
+<%= link_to('View all DVDs in the store!', {:controller => 'dvds', :action => 'list', :id => :all}) %>

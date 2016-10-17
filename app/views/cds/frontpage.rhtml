@@ -1,0 +1,39 @@
+<font size="+3">CDs</font>
+<br />
+
+<%= render :partial => 'shared/featured', :locals =>  {:featured => @featured, :itemtype => 'cd' }%>
+
+
+<table class="frontpage">
+<tr>
+	<td class="frontpage">
+Browse popular artists:<br />
+<ul>
+<% for p in @artists %>
+<li><%= link_to(p.artist, {:controller => 'cds', :action => 'art', :id => CGI.escape(p.artist)}) %></li>
+<% end %>
+</ul>
+<%= link_to('See all artists ...', {:controller => 'cds', :action => 'allartists', :id => :all}) %>
+</td>
+
+<td class="frontpage">
+Browse by label:<br />
+<ul>
+<% for c in @labels %>
+  <li><%= link_to(c['name'], {:controller => 'cds', :action => 'lab', :id => c.id}) %></li>
+<% end %>
+</ul>
+
+</td>
+
+<td class="frontpage">Browse special collections:<br />
+	<ul>
+		<% for s in @specials %>
+		<li><%= link_to(s['name'], {:controller => 'cds', :action => 'cat', :id => s.id} ) %></li>
+		<% end %>
+	</ul>
+</td>
+</tr>
+</table>
+<br />
+<%= link_to('View all CDs in the collection!', {:controller => 'cds', :action => 'list', :id => :all}) %>

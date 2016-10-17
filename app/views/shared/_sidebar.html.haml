@@ -1,0 +1,66 @@
+.sidebar_title Search Copacetic
+.sidebar_search
+  = form_tag url: new_search_path do
+    = text_field_tag("query", params[:query], :autocomplete => "off", :size => 15 )
+    = submit_tag "search!"
+
+- if controller.action_name == 'frontpage'    
+  .sidebar_title Visit us!
+  = raw Article.friendly.find('about-us').blurb
+
+.sidebar_title Just in:
+.scrollable
+  - Justin.published.order('day desc').first.items.sort{rand}[0..8].each do |item|
+    .scroll_item
+      .scroll_image= image_tag item.image_url(:index)
+      .scroll_metadata
+        .scroll_title= link_to item.title, item
+        .scroll_author= raw item.authorship_short
+        .scroll_price= number_to_currency(item.price)
+        %strong= link_to 'See all recent arrivals...', '/just_in'
+
+.sidebar_title= link_to 'Copacetica', '/copacetica'
+Edifiying essays about all things Copacetic
+ 
+.paypal= image_tag 'paypal.gif'
+
+%iframe{:class => :btn, :frameborder => 0, :border => 0, :scrolling => :no, :allowtransparency => true, :height => 25, :width => 157,  :src =>  "http://platform.tumblr.com/v1/follow_button.html?button_type=1&tumblelog=copcomco&color_scheme=light"}
+
+.fb-like-box{"data-href" => "http://www.facebook.com/pages/The-Copacetic-Comics-Company/132379686783143",  "data-width" => "230", "data-show-faces" => "true", "data-stream" => "false",  "data-header" => "false"}
+
+
+/ 
+/ #twitter{:style => "clear: left;"}
+/   .sidebar_title Latest from Twitter
+/   %ul#twitter_update_list
+/     - twitter_status.each do |twit|
+/       .tweet
+/         = raw twit.content
+/         .meta
+/           = link_to time_ago_in_words(Time.at(twit.order.to_i)) + " ago", "https://twitter.com/#!/copcomco/status/#{twit.title.to_s}"
+/           - unless twit.title == 0
+/             &sdot;
+/             = link_to 'reply', 'http://twitter.com/intent/tweet?in_reply_to=' + twit.title.to_s
+/             &sdot;
+/             = link_to 'retweet', 'http://twitter.com/intent/retweet?tweet_id=' + twit.title.to_s
+/             &sdot;
+/             = link_to 'favorite', 'http://twitter.com/intent/favorite?tweet_id=' + twit.title.to_s
+/     = link_to 'Follow @copcomco', 'http://twitter.com/copcomco', :class => "twitter-follow-button"
+/     %script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}   
+/     
+.sidebar_title Visit our building mates at 3138 Dobson:
+%ul
+%li= link_to 'Lili Coffee', 'http://www.facebook.com/pages/Lili-CoffeeShop/135261526501378'
+%li= link_to 'Mind Cure Records', 'http://www.facebook.com/pages/Mind-Cure-Records/119647011399740'
+:javascript
+  $(document).ready(function() {
+    $(".scrollable").cycle({
+      fx: 'fade' });  
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=258774570894773";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+  });

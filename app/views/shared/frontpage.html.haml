@@ -1,0 +1,49 @@
+
+.blue_green_box.smaller
+  = link_to 'IMAGE + TEXT', comics_path
+  = raw "&sdot;"
+  = link_to "SOUND", cds_path
+  = raw " + "
+  = link_to "VISION", dvds_path
+  = raw " &sdot;"
+  = link_to " ART + LITERATURE", special_path('copacetic-select')
+- @frontitems.each do |frontitem|
+  .front_grid= link_to(image_tag(frontitem.item.image_url(:frontgrid), {:width => 125, :height => 125, :border => 0}), frontitem.item)
+
+
+.blue_green_box
+  = link_to 'art', special_path('copacetic-select')
+  = raw "&sdot;"
+  = link_to 'books', books_path
+  = raw "&sdot;"
+  = link_to 'comics', comics_path
+  = raw "&sdot;"
+  = link_to 'dvds', dvds_path
+  = raw "&mdash;"
+  = link_to 'cds', cds_path
+  = raw "&sdot;"  
+  = link_to 'etc', special_path('copacetic-select')
+%br
+%br
+.six.columns.alpha
+  .sidebar_title Copacetic recommends....
+  .scrollable_slow
+    - @selects.each do |select|
+      .select_item
+        .select_image= image_tag select.image.url(:index)
+        .select_metadata
+          .select_title= link_to select.display_title, select
+          .select_author= raw select.authorship
+          - unless select.issuer_credit.blank?
+            .select_issuer= select.issuer_credit
+          .select_description= raw truncate_html(get_description(select, :tiny), :length => 650)
+          = link_to 'More on this item...', select
+.six.columns.omega
+  .sidebar_title Latest news
+  .item_title= @post.title
+  .item_description= raw @post.body
+:javascript
+  $(document).ready(function() {
+    $(".scrollable_slow").cycle({
+      fx: 'fade', timeout: 6500 });  
+      });

@@ -1,0 +1,20 @@
+<% title "Search" %>
+
+<p>
+  <strong>Term:</strong>
+  <%=h @search.term %>
+</p>
+<p>
+  <strong>Count:</strong>
+  <%=h @search.count %>
+</p>
+<p>
+  <strong>Hits:</strong>
+  <%=h @search.hits %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_search_path(@search) %> |
+  <%= link_to "Destroy", @search, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", searches_path %>
+</p>

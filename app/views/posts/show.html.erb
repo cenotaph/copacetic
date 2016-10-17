@@ -1,0 +1,49 @@
+<div class="blogpost">
+  <p class="blogtitle"><%=h @post.title %></p>
+  <SPAN class="blogmeta">Posted by <%= h @post.admin_user.username %> on <%= h @post.created_at.strftime("%d %B %H:%m") %> (<%= time_ago_in_words @post.created_at %> ago)</span>
+	<br />
+	
+    <div class="blogbody"><%= @post.body %>
+<% if is_admin? %> 
+   <%= link_to 'Edit this post', edit_post_path(@post) %><br /><% end %>
+   <a name="comments"></a>
+   <% if @post.comments.size > 0 %>
+      <span class="item_title"><%= @post.comments.size %> comments:</span><br />
+    <% end %>
+      <%
+    	for comment in @post.comments %>
+    	  <div class="blog_comment">
+      <% next unless (comment.approved == true) %>
+    	 <div class="item_timestamp"><i>Posted on <%= comment.date.strftime("%d %b %Y %H:%M") %> by <% if (User.find_by_id(comment.user_id) != nil)  %><%=  User.find(comment.user_id).name.blank? ? User.find(comment.user_id).login : User.find(comment.user_id).name %><% else %>user #<%= h comment.user_id %><% end %>:</i></div>
+    		<div class="item_comment"><%= h comment.post %></div><br /><br />
+    		</div>
+    	<% end %>
+
+
+    <% if current_user  %>
+    	<% if (@post.comments.size == 0) %>
+    	 Be the first to comment on '<i>'<%= h @post['title'] %></i>':
+    	<br />
+    	<% else %>
+    	Leave a comment on <%= h @post['title'] %>!
+    	<% @comment = Comment.new
+    	end %>
+    	<div id="commentbox">
+    		<% form_tag '/posts/add_comment/' + @post.id.to_s do %>
+    	 	<p><label for="post_comment">Comment</label><br/>
+    		<%= text_area 'comment', 'post'  %></p>
+    		<%= submit_tag "Post" %>
+    		<% end %>
+    <% else %>
+    You must be logged in to comment.<br />
+    <%= link_to("Sign up", {:controller => 'user', :action => 'signup'})%> for an account or 
+    <%= link_to("log in", {:controller => 'user', :action => 'login'}) %> to an existing account.
+    <% end %>
+
+    <br clear="all">
+</div>
+
+<br />
+<% if is_admin? %> 
+  <%= link_to 'New post', new_post_path %>
+<% end %>

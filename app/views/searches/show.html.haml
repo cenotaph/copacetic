@@ -1,0 +1,15 @@
+- title "Search"
+%p
+  %strong Term:
+  = h @search.term
+%p
+  %strong Count:
+  = h @search.count
+%p
+  %strong Hits:
+  = h @search.hits
+%p
+  = link_to "Edit", edit_search_path(@search)
+  |
+  \#{link_to "Destroy", @search, :confirm => 'Are you sure?', :method => :delete} |
+  \#{link_to "View All", searches_path}

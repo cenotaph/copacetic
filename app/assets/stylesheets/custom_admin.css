@@ -1,0 +1,31 @@
+#comic_serials_input ol.choices-group {
+  display: none;
+}
+
+#comic_specials_input ol.choices-group {
+  display: none;
+}
+
+.hide_show {
+  padding: 0px 0px 10px 10px;
+  margin-top: 5px;
+}
+
+fieldset.half {
+  width: 45%;
+  margin-right: 15px;
+  float: left;
+}
+
+fieldset.full {
+  clear: left;
+}
+
+#shortdesc {
+  display: none;
+}
+
+.index_as_blog .post, .index_as_blog .article {
+  border-bottom: 1px dotted blue;
+  margin-bottom: 25px;
+}

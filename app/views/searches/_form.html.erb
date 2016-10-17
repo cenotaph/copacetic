@@ -1,0 +1,16 @@
+<% form_for @search do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :term %><br />
+    <%= f.text_field :term %>
+  </p>
+  <p>
+    <%= f.label :count %><br />
+    <%= f.text_field :count %>
+  </p>
+  <p>
+    <%= f.label :hits %><br />
+    <%= f.text_field :hits %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

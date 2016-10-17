@@ -1,0 +1,11 @@
+- items.in_groups_of(4) do |group|
+  .index_group
+    - group.each_with_index do |item, index|
+      - next if item.nil?
+      .index_grid
+        = link_to (item) do
+          .index_image= image_tag item.image.url(:index)
+        .index_metadata
+          .index_title= link_to item.display_title, item
+          .index_author= raw item.authorship_short
+          .index_price= copacetic_price(item)

@@ -1,0 +1,5 @@
+$('#items').html('<%= escape_javascript render(:partial => "shared/search_results", :locals => {:items => @items.map(&:indexed_object)}) %>');
+$('#paginator').html('<%= escape_javascript(paginate(@items, :remote => true).to_s) %>');
+$('.pagination a').on('click', function(e) {
+    $('#paginator').html("<center><img src=\"/images/horizontal-loader.gif\"></center>");
+});

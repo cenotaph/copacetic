@@ -1,0 +1,57 @@
+<%= error_messages_for 'cd' %>
+
+<!--[form:cd]-->
+<p><label for="cd_catno">Catalog # (if applicable)</label><br/>
+<%= text_field 'cd', 'catno'  %></p>
+
+<p><label for="cd_title">Title</label><br/>
+<%= text_field 'cd', 'title'  %></p>
+
+<p><label for="cd_artist">Artist</label><br/>
+<%= text_field 'cd', 'artist'  %></p>
+
+<p><label for="cd_label_id">Label</label><br/>
+<%= collection_select('cd', 'label_id', Label.all, :id, :name,  options ={:prompt => "-Select a label ..."}) %> <%= link_to("New ...", :controller => 'labels', :action => 'new') %></p>
+
+<p><label for="cd_numofdiscs">Number of discs</label><br/>
+<%= text_field 'cd', 'numofdiscs'  %></p>
+
+<p><label for="cd_listprice">List price</label><br/>
+<%= text_field 'cd', 'listprice'  %></p>
+
+<p><label for="cd_price">Price</label><br/>
+<%= text_field 'cd', 'price'  %></p>
+
+<p><label for="cd_update_id"> Associate to update/"just in":</label><br />
+<%= collection_select('cd', 'update_id', Update.all, :id, :name, {}) %>
+
+<p><label for="cd_instock">Instock</label><br/>
+<% options = {"Yes" => true, "No" => false } %>
+<%= select("cd", "instock", options, { :selected => @cd.instock })%>
+
+
+<p><label for="cd_shortdesc">Short description (for list view)</label><br/>
+<%= text_area 'cd', 'shortdesc'  %></p>
+
+<p><label for="cd_description">Description</label><br/>
+<%= text_area 'cd', 'description', :columns => 80, :rows => 20  %></p>
+
+<p><label for="cd_numbersold">Number sold</label><br/>
+<%= text_field 'cd', 'numbersold'  %></p>
+
+
+<p><label for="cd_tinydesc">Tiny description (for Google)</label><br/>
+<%= text_field 'cd', 'tinydesc'  %></p>
+
+<p><label for="cd_keywords">Search engine keywords</label><br/>
+<%= text_field 'cd', 'keywords'  %></p>
+
+<p><% for special in Special.find(:all) %>
+	<div>
+		<%= check_box_tag 'cd[special_ids][]', special.id, @cd.specials.include?(special) %>
+		<%= special.name %></div>
+	<% end %>
+
+  </p>
+<!--[eoform:cd]-->
+

@@ -1,0 +1,5 @@
+$('#items').html('<%= escape_javascript render(:partial => "shared/belongs_to", :locals => {:items => @items}) %>');
+$('.paginator').html('<%= pluralize(@items.total_count, "item") %> found: <%= escape_javascript(paginate(@items, :remote => true).to_s) %>');
+$('.pagination a').on('click', function(e) {
+    $('.paginator').html("<center><img src=\"/images/horizontal-loader.gif\"></center>");
+});

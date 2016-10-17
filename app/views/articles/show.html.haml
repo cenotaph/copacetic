@@ -1,0 +1,18 @@
+= raw(sanitize(@article.content, :tags => %w{b strong h2 h1 h3 h4 h5 h6 em i p br img blockquote a  }))
+
+.others_header
+  Discussion Facebook:
+#fb-root
+
+.fb-comments{"data-href" => 'http://' + request.host + url_for(@article), "data-num-posts" => "5", "data-width" => "760"} 
+
+%a{:href => "http://www.tumblr.com/share", :style => "display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('http://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent;", :title => "Share on Tumblr"} Share on Tumblr
+
+:javascript
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=361608853869521";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));

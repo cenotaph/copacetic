@@ -1,0 +1,19 @@
+
+
+%table.featured{:cellpadding => "10"}
+  %tr
+    %td{:colspan => "2"}
+      %b= "#{pluralize(@featured.length, ' featured item').gsub(/^\d\s/, '')}:" 
+  - @featured.each do |f|
+    %tr
+      %td
+        - if f.image?
+          = link_to image_tag(f.image.url(:index), :border => 1), f
+      %td
+        %b= f.title
+        by 
+        = f.authorship
+        %br/
+        %span.featuredesc= raw truncate_words(f['shortdesc']) 
+        %br/
+        = link_to('Read more ...', {:controller => itemtype+'s', :action=>'show', :id => f.id } ) 

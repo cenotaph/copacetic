@@ -1,0 +1,65 @@
+!!! 5
+%html
+  %head
+    %meta{ :charset => "utf-8" }/
+    = stylesheet_link_tag  "application", :media => "all"
+    = javascript_include_tag "application"
+    %meta{ :content => "width=device-width; initial-scale=1.0", :name => "viewport" }/
+    = csrf_meta_tags
+    %meta{:property => "fb:app_id", :content => (Rails.env == 'development' ? "361608853869521" : "248448965247367")}  
+    = display_meta_tags :site => 'The Copacetic Comics Company'
+    - if current_admin_user.nil?
+      :javascript
+        var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-440777-3']);
+          _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +    '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+    :javascript
+      var switchTo5x=false;
+    %script{:type => "text/javascript", :src => "http://w.sharethis.com/button/buttons.js"}
+    %script{:type => "text/javascript"} stLight.options({publisher: "ur-51af7ca3-c8a0-5c4e-81a7-9ff34b002213"});
+  %body
+    .container
+      .sixteen.columns.header
+        .header_link{:style => "background: #FFFFFF url('#{Logo.order_by_rand.first.filename.url(:standard)}') no-repeat 0px 15px;"}
+          .header_text
+            = link_to 'The Copacetic Comics Company', '/'
+            .header_menu
+              %ul
+                %li= link_to 'Comics', comics_path
+                %li= link_to 'Books', books_path
+                %li= link_to 'Film', dvds_path
+                %li= link_to 'Music', cds_path
+                %li= link_to 'Just In!', '/just_in'
+                %li= link_to 'Ordering info', article_path('ordering-info')
+                %li= link_to 'Copacetic Universe', article_path('copacetic-universe')
+                %li= link_to 'Sale!', special_path('special-sale')
+                - if current_admin_user
+                  %li= link_to 'Admin', '/admin'
+      .thirteen.columns.content.alpha
+        = yield
+      .three.columns.omega.sidebar
+        = render :partial => 'shared/sidebar'
+      .sixteen.columns.footer
+        .footer_link.one.column.alpha= link_to image_tag('/images/footer_small_circle.png'), '/'
+        .footer_text.fifteen.columns.omega
+          .four.columns.alpha
+            All text &copy; 2001 - 
+            = Time.now.strftime('%Y')
+            The Copacetic Comics Company unless otherwise specified.
+          .four.columns.alpha
+            %u visit us:
+            %p 3138 Dobson St. 3rd floor
+            %p Pittsburgh, PA 15219
+          .four.columns.alpha
+            %u write us:
+            %p PO Box 301
+            %p Pittsburgh, PA 15230
+          .three.columns.omega
+            %p copacetic@copacetic.biz
+            %p (412) 251 - 5451
+            %p= link_to 'About us', article_path('about-us')

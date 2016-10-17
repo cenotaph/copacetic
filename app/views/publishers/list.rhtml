@@ -1,0 +1,23 @@
+<h1>Listing publishers</h1>
+
+<table>
+  <tr>
+  <% for column in Publisher.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for publisher in @publishers %>
+  <tr class="<%= cycle('odd', 'even') %>">
+  <td><%= publisher.name %></td>
+  <td><%= truncate_words(publisher.description)  if publisher.description%>
+
+    <td><%= link_to 'Show titles', :controller => 'comics', :action => 'pub', :id => publisher %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => publisher %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => publisher }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @publishers %>
+<%= link_to 'New publisher', :action => 'new' %>

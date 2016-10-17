@@ -1,0 +1,12 @@
+<% for column in Serial.content_columns %>
+<p>
+  <% if (column.human_name =~ /description/i)  %>
+<B>-Description:</b>	<%= in_place_editor_field :serial, :description, {}, :rows =>20 %>
+<% else %>
+  <b><%= column.human_name %>:</b> <%=h @serial.send(column.name) %>
+  <% end %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @serial %> |
+<%= link_to 'Back', :action => 'list' %>

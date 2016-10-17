@@ -1,0 +1,32 @@
+- item ||= @item
+#othersbrowser
+  .others_header You may also enjoy these related titles:
+
+  - if @offset.nil?
+    - @offset = 0
+    - @til = 8
+  - else
+    - @offset = @offset.to_i
+    - @til = @til.to_i
+
+  - if (@offset + 8) < item.others.size
+    - forward = @offset + 8
+  - else
+    - forward = 0
+
+  - if (@offset - 9) < 0
+    - back = item.others.size - 8
+  - else
+    - back = @offset - 8
+
+  - if item.others.size > 9
+    #left_arrow.otherspane
+      = link_to image_tag('/images/left.gif', :border => 0), "/#{item.class.to_s.tableize}/#{item.id.to_s}/others/#{back}", :remote => true
+  - item.others[@offset..@til].each do |other|
+    .otherspane{:id => other.id}
+      - if other.image?
+        = link_to image_tag(other.image.url, :border => 0, :width => 50), other
+      .others_title= link_to other.display_title, other
+  - if item.others.size > 7
+    #right_arrow.otherspane
+      = link_to image_tag('/images/right.gif', :border => 0), "/#{item.class.to_s.tableize}/#{item.id.to_s}/others/#{forward}", :remote => true
