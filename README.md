@@ -1,0 +1,2 @@
+# copacetic
+Copacetic Comics CMS
