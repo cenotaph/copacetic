@@ -28,6 +28,14 @@ GIT
       responders
 
 GIT
+  remote: git://github.com/galetahub/ckeditor.git
+  revision: 43cf1f00e86c19a8071d10e7f1440963a613515f
+  specs:
+    ckeditor (4.2.1)
+      cocaine
+      orm_adapter (~> 0.5.0)
+
+GIT
   remote: https://github.com/helios-technologies/skeleton-rails
   revision: 6e46649d29006643b33c95b82bc9d0e28df2f8cc
   specs:
@@ -130,9 +138,6 @@ GEM
     carrierwave-aws (1.0.2)
       aws-sdk (~> 2.0)
       carrierwave (>= 0.7, < 2.0)
-    ckeditor (4.2.0)
-      cocaine
-      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -376,7 +381,7 @@ DEPENDENCIES
   capistrano3-puma
   carrierwave
   carrierwave-aws
-  ckeditor
+  ckeditor!
   coffee-rails (~> 4.2)
   devise
   figaro
