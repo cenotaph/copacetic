@@ -1,0 +1,3 @@
+
+$('#paginator').html("<div class='toggle'><%= pluralize(@items.total_count, 'item') %> found:</div><%= escape_javascript(paginate(@items, :remote => true).to_s) %>"); 
+$('#items').html('<%= escape_javascript render(:partial => "shared/search_results", :locals => {:items => @items.flatten.compact}) %>');
