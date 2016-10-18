@@ -1,10 +1,11 @@
 !!! 5
 %html
   %head
-    %meta{ :charset => "utf-8" }/
     = stylesheet_link_tag  "application", :media => "all"
     = javascript_include_tag "application"
-    %meta{ :content => "width=device-width; initial-scale=1.0", :name => "viewport" }/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     = csrf_meta_tags
     %meta{:property => "fb:app_id", :content => (Rails.env == 'development' ? "361608853869521" : "248448965247367")}  
     = display_meta_tags :site => 'The Copacetic Comics Company'

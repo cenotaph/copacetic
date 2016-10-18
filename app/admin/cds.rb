@@ -8,6 +8,20 @@ ActiveAdmin.register Cd do
   end
   
   controller do
+    def find_resource
+      begin
+        scoped_collection.where(slug: params[:id]).first!
+      rescue ActiveRecord::RecordNotFound
+        scoped_collection.find(params[:id])
+      end
+    end
+    
+    def permitted_params
+      params.permit(:cd => [:title, :artist, :label_id, :numofdiscs, :genre_id, :listprice, :price, :dateadded, :instock, :description,
+        :numbersold, :justin_id, :shortdesc, :tinydesc, :image, :catno, :keywords, :weight, :slug])
+      # params.permit! # allow all parameters
+    end
+    
     autocomplete :creator, :firstname, :display_value => :fullname, :extra_data => [:firstname, :lastname] 
     # autocomplete :creator, :firstname, :extra_data => [:lastname], :display_value => :fullname
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20121128205534) do
+ActiveRecord::Schema.define(version: 20161018113536) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "resource_id",                 null: false
@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(version: 20121128205534) do
 
   create_table "dvds", force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=latin1" do |t|
     t.string   "title"
-    t.integer  "director"
+    t.integer  "director_id"
     t.integer  "year"
     t.string   "country"
     t.integer  "publisher_id"

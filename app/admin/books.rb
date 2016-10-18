@@ -9,6 +9,21 @@ ActiveAdmin.register Book do
   end
   
   controller do
+    def find_resource
+      begin
+        scoped_collection.where(slug: params[:id]).first!
+      rescue ActiveRecord::RecordNotFound
+        scoped_collection.find(params[:id])
+      end
+    end
+    
+    def permitted_params
+      params.permit(:book => [:title, :published_id, :hardcover, :pagecount, :listprice, :price, 
+        :fiction, :dateadded, :instock, :description, :isbn, :ean, :numbersold, :image, :shortdesc, 
+      :justin_id, :tinydesc, :weight, :slug])
+      # params.permit! # allow all parameters
+    end
+    
     autocomplete :creator, :firstname, :display_value => :fullname, :extra_data => [:firstname, :lastname] 
     # autocomplete :creator, :firstname, :extra_data => [:lastname], :display_value => :fullname
   end
@@ -58,13 +73,13 @@ ActiveAdmin.register Book do
   controller do
     def create 
       create! do |format|
-        format.html { redirect_to @book }
+        format.html { redirect_to admin_books_path }
       end
     end
 
     def update
       update! do |format|
-        format.html { redirect_to @book }
+        format.html { redirect_to admin_books_path }
       end
     end
   end

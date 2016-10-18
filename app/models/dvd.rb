@@ -1,8 +1,8 @@
 class Dvd < ActiveRecord::Base
-  paginates_per 32
+
   has_many :directors, :through => :directors_dvds
   has_many :directors_dvds,  :dependent => :delete_all
-  has_and_belongs_to_many :comments, :join_table => 'comments_dvds'
+  # has_and_belongs_to_many :comments, :join_table => 'comments_dvds'
   has_many :specials, :through => :items_specials
   has_many :items_specials, :as => :item
   mount_uploader :image, ImageUploader  
@@ -138,12 +138,10 @@ class Dvd < ActiveRecord::Base
      else
        others = []
        self.directors.each do |director|
-         others += Dvd.find(:all, :joins => :directors, :conditions => [ 'director_id = ?',  director.id ], :order => 'dvds.id DESC').delete_if{
-             |x| x == self }.sort{|x,y| y.id <=> x.id}
+         others += director.dvds.to_a.delete_if{|x| x== self }.sort_by(&:id)
         end
           unless self.publisher.blank?
-          others += Dvd.find(:all, :joins => :publisher, :conditions => ['publisher_id =?', self.publisher.id], :order => "dvds.id DESC").delete_if{
-            |x| x == self}
+          others += self.publisher.dvds.to_a.delete_if{|x| x== self }.sort_by(&:id)
           end
 
        return others.uniq

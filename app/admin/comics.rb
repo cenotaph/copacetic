@@ -16,6 +16,12 @@ ActiveAdmin.register Comic do
         scoped_collection.find(params[:id])
       end
     end
+    
+    def permitted_params
+      params.permit(:comic => [:title, :issue, :publisher_id, :listprice, :price, :dateadded, :instock, :description, :pagecount, 
+        :dimensions, :numbersold, :image, :shortdesc, :tinydesc, :justin_id, :weight, :slug])
+      # params.permit! # allow all parameters
+    end
 
     autocomplete :creator, :firstname, :display_value => :fullname, :extra_data => [:firstname, :lastname] #,   
   end
@@ -67,12 +73,12 @@ ActiveAdmin.register Comic do
   controller do
     def create 
       create! do |format|
-        format.html { redirect_to @comic }
+        format.html { redirect_to admin_comics_path }
       end
     end
     def update
       update! do |format|
-        format.html { redirect_to @comic }
+        format.html { redirect_to admin_comics_path }
       end
     end
   end

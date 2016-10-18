@@ -1,4 +1,5 @@
 ActiveAdmin.register Dvd do
+  remove_filter :directors_dvds
   scope :all, :default => true
   scope :in_stock do |dvds|
     dvds.where("instock is true")
@@ -8,6 +9,21 @@ ActiveAdmin.register Dvd do
   end
   
   controller do
+    def find_resource
+      begin
+        scoped_collection.where(slug: params[:id]).first!
+      rescue ActiveRecord::RecordNotFound
+        scoped_collection.find(params[:id])
+      end
+    end
+    
+    def permitted_params
+      params.permit(:dvd => [:title, :director, :director_id, :year, :country, :published_id, :listprice,
+                             :price, :dateadded, :instock, :description, :numbersold, :shortdesc, :justin_id,
+                             :image, :tinydesc, :weight, :slug])
+      # params.permit! # allow all parameters
+    end
+    
     autocomplete :director, :firstname, :display_value => :fullname, :extra_data => [:firstname, :lastname] 
     # autocomplete :creator, :firstname, :extra_data => [:lastname], :display_value => :fullname
   end
@@ -58,14 +74,14 @@ ActiveAdmin.register Dvd do
 
     def create 
       create! do |format|
-        format.html { redirect_to @dvd }
+        format.html { redirect_to admin_dvds_path }
       end
     end
 
     
     def update
       update! do |format|
-        format.html { redirect_to @dvd }
+        format.html { redirect_to admin_dvds_path }
       end
     end
   end
