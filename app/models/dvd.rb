@@ -17,7 +17,9 @@ class Dvd < ActiveRecord::Base
   validates_presence_of :title
   before_save :check_front_grid
   attr_accessor :include_front_grid  
-
+  
+  scope :instock, ->() { where(instock: true) }
+  
   def self.by_special(s)
     joins(:items_specials).where("items_specials.item_type = 'Dvd'  and items_specials.special_id = ?", s)
   end 

@@ -1,12 +1,13 @@
 
 - if items.size > 4
-  - items.each_with_index do |item, index|
-    .index_grid{:style => ( (index  % 4 == 0) ? "clear: left;" : "" ) + "display: block"}
-      = link_to(item) do
-        .index_image= image_tag item.image.url(:index)
-      .index_title= link_to highlight(item.display_title, params[:query]), item
-      .index_author= raw highlight(item.authorship_short, params[:query])
-      .price= copacetic_price(item)
+  .small-up-2.medium-up-3.large-up-4.xlarge-up-5
+    - items.each_with_index do |item, index|
+      .column.index_grid
+        = link_to(item) do
+          .index_image= image_tag item.image.url(:index)
+        .index_title= link_to highlight(item.display_title, params[:query]), item
+        .index_author= raw highlight(item.authorship_short, params[:query])
+        .price= copacetic_price(item)
 
 - elsif items.size == 1
   - items.each do |item|
@@ -31,5 +32,5 @@
         
 :javascript
   $('.pagination a').on('click', function(e) {
-    $('#paginator').html("<center><img src=\"/images/horizontal-loader.gif\"></center>");
+    $('#paginator').html("<center><img src=\"/assets/horizontal-loader.gif\"></center>");
   });

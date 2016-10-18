@@ -13,7 +13,7 @@
   .toggle= "#{pluralize(@items.total_count, 'item')} found:"
   = paginate @items, :remote => true
   /.change_link= link_to '(change)', '#', :onclick => "$('.outofstock').fadeToggle(); $('.toggle').html($('.toggle').html() == 'Showing in stock items' ? 'Showing all items, including out of stock' : 'Showing in stock items');"
-#items{:style => "clear: both"}= render :partial => 'shared/belongs_to', :locals => {:items => @items}
+#items.row.expanded{:style => "clear: both"}= render :partial => 'shared/belongs_to', :locals => {:items => @items}
 .paginator{:style => "clear: left"}= paginate @items, :remote => true
 :javascript
   $('.pagination a').on('click', function(e) {

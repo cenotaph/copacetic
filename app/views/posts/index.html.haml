@@ -1,25 +1,28 @@
-%h1 The Copacetic Blog
-%span.front_article_body Here is a blog where we will post our latest thoughts, news or other comments.
-%br/
-%br/
-- for post in @posts
-  .blogpost
-    %p.blogtitle= link_to post.title, post
-    %span.blogmeta
-      Posted by #{h post.user.login} on #{h post.created_at.strftime("%d %B %H:%m")} (#{time_ago_in_words post.created_at} ago)
-    %br/
-    .blogbody= post.body
-    - if is_admin?
-      = link_to 'Edit this post', edit_post_path(post)
-      %br/
-    - if post.approved_comments.size == 0
-      No comments.
-      \#{link_to('Leave the first comment!', '/posts/' + post.id.to_s + '#comments' )}
-    - else
-      = link_to(pluralize(post.approved_comments.size, 'comment'), '/posts/' + post.id.to_s + '#comments')
-      \...
-    %br{:clear => "all"}/
-  %hr{:width => "40%"}/
-%br/
-- if is_admin?
-  = link_to 'New post', new_post_path
+.blog_index
+  .row.expanded
+    .small-12.columns
+      %h1 The Copacetic Blog
+    
+  .row.expanded
+    .small-12.columns    
+      .front_article_body Here is a blog where we will post our latest thoughts, news or other comments.
+  .row.expanded
+    .small-12.columns= paginate @posts      
+  .row.expanded
+    .small-12.columns    
+      - @posts.each do |post|
+        .blogpost
+          %p.blogtitle= link_to post.title, post
+          %span.blogmeta
+            = "Posted on #{h post.created_at.strftime("%d %B %H:%m")} (#{time_ago_in_words post.created_at} ago)"
+          %br/
+          .blogbody= raw  post.body
+          - if is_admin?
+            = link_to 'Edit this post', edit_post_path(post), class: [:button, :small]
+  .row.expanded
+    .small-12.columns= paginate @posts
+
+  - if is_admin?
+    .row.expanded
+      .small-12.columns
+        = link_to 'New post', new_post_path, class: [:button, :small]

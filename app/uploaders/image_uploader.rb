@@ -34,7 +34,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   
   version :frontgrid do
-    process :resize_to_fill => [125, 125]
+    process :resize_to_fill => [256, 256]
   end
   # Process files as they are uploaded:
   # process :scale => [200, 300]

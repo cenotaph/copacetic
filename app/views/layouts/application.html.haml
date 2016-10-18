@@ -24,42 +24,58 @@
     %script{:type => "text/javascript"} stLight.options({publisher: "ur-51af7ca3-c8a0-5c4e-81a7-9ff34b002213"});
   %body
     .container
-      .sixteen.columns.header
-        .header_link{:style => "background: #FFFFFF url('#{Logo.order_by_rand.first.filename.url(:standard)}') no-repeat 0px 15px;"}
-          .header_text
-            = link_to 'The Copacetic Comics Company', '/'
-            .header_menu
-              %ul
-                %li= link_to 'Comics', comics_path
-                %li= link_to 'Books', books_path
-                %li= link_to 'Film', dvds_path
-                %li= link_to 'Music', cds_path
-                %li= link_to 'Just In!', '/just_in'
-                %li= link_to 'Ordering info', article_path('ordering-info')
-                %li= link_to 'Copacetic Universe', article_path('copacetic-universe')
-                %li= link_to 'Sale!', special_path('special-sale')
-                - if current_admin_user
-                  %li= link_to 'Admin', '/admin'
-      .thirteen.columns.content.alpha
-        = yield
-      .three.columns.omega.sidebar
-        = render :partial => 'shared/sidebar'
-      .sixteen.columns.footer
-        .footer_link.one.column.alpha= link_to image_tag('/images/footer_small_circle.png'), '/'
-        .footer_text.fifteen.columns.omega
-          .four.columns.alpha
-            All text &copy; 2001 - 
-            = Time.now.strftime('%Y')
-            The Copacetic Comics Company unless otherwise specified.
-          .four.columns.alpha
-            %u visit us:
-            %p 3138 Dobson St. 3rd floor
-            %p Pittsburgh, PA 15219
-          .four.columns.alpha
-            %u write us:
-            %p PO Box 301
-            %p Pittsburgh, PA 15230
-          .three.columns.omega
-            %p copacetic@copacetic.biz
-            %p (412) 251 - 5451
+      %header
+        .row.expanded
+          .small-12.columns
+          
+            .header_link{:style => "background: #FFFFFF url('#{Logo.order_by_rand.first.filename.url(:standard)}') no-repeat 0px 15px;"}
+              .header_text
+                = link_to 'The Copacetic Comics Company', '/'
+              %div{:'data-sticky-container' => ''}
+                .title-bar{:'data-sticky' => '', :'data-options' => 'marginTop: 0;', style: 'width: 100%'}
+                  %ul.horizontal.menu
+                    %li.title= link_to 'Copacetic', '/'
+                    %li= link_to 'Comics', comics_path
+                    %li= link_to 'Books', books_path
+                    %li= link_to 'Film', dvds_path
+                    %li= link_to 'Music', cds_path
+                    %li= link_to 'Just In!', '/just_in'
+                    %li= link_to 'Ordering info', article_path('ordering-info')
+                    %li= link_to 'Copacetic Universe', article_path('copacetic-universe')
+                    %li= link_to 'Sale!', special_path('special-sale')
+                    - if current_admin_user
+                      %li= link_to 'Admin', '/admin'
+      %section#body
+        .row.expanded
+          .medium-9.columns.content
+            = yield
+          .medium-3.columns.sidebar
+            = render :partial => 'shared/sidebar'
+      %footer
+        .row.expanded
+          .footer_link.small-3.medium-1.columns
+            = link_to image_tag(image_path('footer_small_circle.png')), '/'
             %p= link_to 'About us', article_path('about-us')
+          .footer_text.small-9.medium-10.columns
+            .row.expanded
+              .small-6.columns.medium-4
+                All text &copy; 2001 - 
+                = Time.current.strftime('%Y')
+                The Copacetic Comics Company unless otherwise specified.
+              .small-6.columns.medium-4
+                %u visit us:
+                %p 3138 Dobson St. 3rd floor
+                %p Pittsburgh, PA 15219
+              .small-6.columns.medium-4
+                %u write us:
+                %p PO Box 301
+                %p Pittsburgh, PA 15230
+              .small-6.columns.medium-4
+                %p copacetic@copacetic.biz
+                %p (412) 251 - 5451
+                
+                
+  :javascript                
+    $(document).ready(function() {
+      %{= yield :jquery}
+      });

@@ -1,7 +1,9 @@
 /*
  *= require_self
- *= require normalize
- *= require skeleton
+ *= require _settings
+ *= require foundation_and_overrides
+
+
  *= require copacetic
 
  *= require jquery-ui/all

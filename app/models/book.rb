@@ -28,7 +28,8 @@ class Book < ActiveRecord::Base
     joins(:items_specials).where("items_specials.item_type = 'Book'  and items_specials.special_id = ?", s)
   end 
   
- scope :by_publisher, -> (s) { joins(:publisher).where("books.publisher_id = ?", s) }
+  scope :instock, ->() { where(instock: true) }
+  scope :by_publisher, -> (s) { joins(:publisher).where("books.publisher_id = ?", s) }
       
   def self.by_creator(s)
     if s =~ /\w+\s\w+/

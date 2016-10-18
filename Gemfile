@@ -34,8 +34,11 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano'#, '~> 3.1.0'
+gem 'capistrano-rails'#, '~> 1.1.0'
+gem 'capistrano-rvm'
+gem 'capistrano-bundler'
+gem 'capistrano3-puma'
 
 gem 'activeadmin', github: 'activeadmin'
 
@@ -46,6 +49,7 @@ gem 'ckeditor'
 gem 'devise'
 gem 'figaro'
 gem 'formtastic'
+gem 'foundation-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'has_scope'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'

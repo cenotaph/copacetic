@@ -1,7 +1,7 @@
 - item ||= @item
 #othersbrowser
   .others_header You may also enjoy these related titles:
-
+  
   - if @offset.nil?
     - @offset = 0
     - @til = 8
@@ -18,15 +18,17 @@
     - back = item.others.size - 8
   - else
     - back = @offset - 8
+  
 
-  - if item.others.size > 9
-    #left_arrow.otherspane
-      = link_to image_tag('/images/left.gif', :border => 0), "/#{item.class.to_s.tableize}/#{item.id.to_s}/others/#{back}", :remote => true
-  - item.others[@offset..@til].each do |other|
-    .otherspane{:id => other.id}
-      - if other.image?
-        = link_to image_tag(other.image.url, :border => 0, :width => 50), other
-      .others_title= link_to other.display_title, other
-  - if item.others.size > 7
-    #right_arrow.otherspane
-      = link_to image_tag('/images/right.gif', :border => 0), "/#{item.class.to_s.tableize}/#{item.id.to_s}/others/#{forward}", :remote => true
+  .small-up-3.medium-up-5.large-up-6.xlarge-up-6
+
+    #left_arrow.otherspane.column
+      = link_to image_tag(image_path('left.gif'), :border => 0), "/#{item.class.to_s.tableize}/#{item.id.to_s}/others/#{back}", :remote => true
+    - item.others[@offset..@til].each do |other|
+      .otherspane.column{:id => other.id}
+        - if other.image?
+          = link_to image_tag(other.image.url(:index)), other
+        .others_title= link_to other.display_title, other
+
+    #right_arrow.otherspane.column
+      = link_to image_tag(image_path('right.gif'), :border => 0), "/#{item.class.to_s.tableize}/#{item.id.to_s}/others/#{forward}", :remote => true

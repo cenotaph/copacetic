@@ -52,12 +52,8 @@ module ApplicationHelper
   end
   
   def is_admin?
-    if current_admin_user
-      if admin_user.role == 'admin'
-        return true
-      else
-        return false
-      end
+    if admin_user_signed_in?
+      return true
     else
       return false
     end

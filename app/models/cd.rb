@@ -13,7 +13,7 @@ class Cd < ActiveRecord::Base
   before_save :check_front_grid
   attr_accessor :include_front_grid
   friendly_id :display_title,  :use => :slugged
-
+  scope :instock, ->() { where(instock: true) }
   def self.by_special(s)
     joins(:items_specials).where("items_specials.item_type = 'Cd'  and items_specials.special_id = ?", s)
   end 

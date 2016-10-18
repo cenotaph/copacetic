@@ -1,7 +1,10 @@
-.item_title= "Results for \"#{params[:query]}\""
+.row.expanded
+  .small-12.columns
+    .item_title= "Results for \"#{params[:query]}\""
 
-.filters#paginator
-  .toggle= "#{pluralize(@items.total_count, 'item')} found:"
-  = paginate @items, :remote => true
-  /.change_link= link_to '(change)', '#', :onclick => "$('.outofstock').fadeToggle(); $('.toggle').html($('.toggle').html() == 'Showing in stock items' ? 'Showing all items, including out of stock' : 'Showing in stock items');"
-#items{:style => "clear: both"}= render :partial => 'shared/search_results', :locals => {:items => @items.map(&:indexed_object)}
+    .filters#paginator
+      .toggle= "#{pluralize(@items.total_count, 'item')} found:"
+      = paginate @items, :remote => true
+      /.change_link= link_to '(change)', '#', :onclick => "$('.outofstock').fadeToggle(); $('.toggle').html($('.toggle').html() == 'Showing in stock items' ? 'Showing all items, including out of stock' : 'Showing in stock items');"
+    #items{:style => "clear: both"}= render :partial => 'shared/search_results', :locals => {:items => @items.flatten.compact}
+    = paginate @items, :remote => true
