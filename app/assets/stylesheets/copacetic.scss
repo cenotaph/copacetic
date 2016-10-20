@@ -31,8 +31,8 @@ footer {
   }
 }
 header {
-
-  margin-bottom: 2rem;
+  height: 150px;
+  margin-bottom: 1.4rem;
   .header_link {
 //    height: 95px;
     .header_text {
@@ -48,6 +48,8 @@ header {
     }
     .title-bar {
       &.is-stuck {
+        z-index: 1000;
+        background-color: white;
         ul.menu {
           li.title {
             display: block;
@@ -87,7 +89,7 @@ header {
 .blue_green_box {
   background-color:#000263; color: #00ff53; 
   font-size: 2rem;
-
+  font-weight: bold;
 
   padding: 0.4rem;
   font-family: 'Helvetica Neue', 'Arial';
@@ -117,7 +119,7 @@ margin-left: 20px;
 }
 
 section#body {
-  padding: 2rem 0;
+  padding: 0 0 2rem 0;
 }
 .blog_index {
   .blogpost {
@@ -205,18 +207,19 @@ table.featured {
 
 }
 
+
 .pagination {
   float: right;
   padding: 3px;
   margin: 3px;
 }
 .pagination a {
-  padding: 2px 5px 2px 5px;
-  margin: 2px;
-  font-size: 9pt;
-  border: 1px solid #aaaadd;
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  font-size: 0.9rem;
+  border: 1px solid #FFF;
   text-decoration: none;
-  color: #000099;
+  color: #FFF;
 }
 .pagination a:hover, .pagination a:active {
   border: 1px solid #000099;
@@ -224,12 +227,15 @@ table.featured {
 }
 .pagination span {
  float: left;
+ &.gap {
+   display: none;
+ }
 
 } 
 .pagination span.current {
-  padding: 2px 5px 2px 5px;
-  margin: 2px;
-  font-size: 9pt;
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  font-size: 0.9rem;
   border: 1px solid #000099;
   font-weight: bold;
   background-color: #000099;
@@ -313,11 +319,11 @@ td.frontgraphics {
     width: 150px;
   }
 }
-.index_featured {
-  padding-right: 5px;
-  margin-left: 0;
-
-}
+//.index_featured {
+//  padding: 0.5rem 1rem 2rem 1rem;
+//  border-right: 1px dotted $lightblue;
+//
+//}
 
 .index_title {
     color: black;
@@ -816,6 +822,8 @@ span.small_link {
   width: 100%;
   padding: 2px;
   background-color: #edffed;
+  border-bottom: 5px solid $blue;
+  color: black;
   .toggle { float: left; }
   .change_link { font-size: 9pt;margin-left: 15px; float: left;}
 }
@@ -823,10 +831,17 @@ span.small_link {
 .sidebar_title {
   font-size: 1.6rem;
   margin-bottom: 1.1rem;
+  line-height: 1.8rem;
   font-weight: bold;
   clear: both;
   border-bottom: 1px dotted $blue;
-  
+  &.clear_top {
+    margin-top: 2rem;
+  }
+  &.smaller {
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
   font-family: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
 }
 
@@ -921,10 +936,18 @@ span.small_link {
 .browse_title {
   text-align: center;
   font-family: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
-  font-size: 13pt;
-  margin-bottom: 5px;
+  font-size: 1.6rem;
+  margin-bottom: 1.1rem;
+  background-color: $blue;
+  color: white;
+  button {
+    position: relative;
+    top: 1.6rem;
+  }
 }
-
+.main_listings {
+  margin-top: 3rem;
+}
 .index_group {
   clear: left;
 }

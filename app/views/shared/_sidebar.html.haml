@@ -7,17 +7,17 @@
         = submit_tag "search!"
 
     - if controller.action_name == 'frontpage'    
-      .sidebar_title Visit us!
+      .sidebar_title.clear_top Visit us!
       = raw Article.friendly.find('about-us').blurb
 .row.expanded.just_in
   .small-12.columns
-    .sidebar_title Just in:
+    .sidebar_title.clear_top Just in:
     .scrollable
       - Justin.published.order('day desc').first.items.sort{rand}[0..9].in_groups_of(2).each do |group|
         .scroll_item
           - group.each_with_index do |item, index|
             - next if item.nil?
-            .columns.large-6.medium-12{class: index == 1 ? 'hide-for-medium-only hide-for-small-only' : false }
+            .columns.large-6.medium-12{class: index == 1 ? 'show-for-large' : false }
               .scroll_image= image_tag item.image_url(:index)
               .scroll_metadata
                 .scroll_title= link_to item.title, item
@@ -27,7 +27,7 @@
 
 .row.expanded
   .small-12.columns
-    .sidebar_title= link_to 'Copacetica', '/copacetica'
+    .sidebar_title.clear_top= link_to 'Copacetica', '/copacetica'
     Edifiying essays about all things Copacetic
  
     .paypal= image_tag 'paypal.gif'
@@ -38,7 +38,7 @@
 
 .row.expanded
   .small-12.columns
-    .sidebar_title Visit our building mates at 3138 Dobson:
+    .sidebar_title.smaller Visit our building mates at 3138 Dobson:
     %ul
     %li= link_to 'Lili Coffee', 'http://www.facebook.com/pages/Lili-CoffeeShop/135261526501378'
     %li= link_to 'Cruel Noise Records', 'https://www.facebook.com/CruelNoiseRecords/'

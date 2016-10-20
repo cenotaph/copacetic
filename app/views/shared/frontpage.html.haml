@@ -1,18 +1,14 @@
 .row.expanded
-  .small-12.medium-12.columns.blue_green_box.smaller.text-right
+  .small-12.medium-12.columns.blue_green_box.smaller.text-center
 
     = link_to 'IMAGE + TEXT', comics_path
     = raw "&sdot;"
     = link_to "SOUND", cds_path
     = raw " + "
-    .hide-for-small-only.medium-6.columns.text-left
-      = link_to "VISION", dvds_path
-      = raw " &sdot;"
-      = link_to " ART + LITERATURE", special_path('copacetic-select')
-  .small-12.columns.blue_green_box.smaller.show-for-small-only
     = link_to "VISION", dvds_path
     = raw " &sdot;"
     = link_to " ART + LITERATURE", special_path('copacetic-select')
+
 .row.expanded
   - @frontitems.each do |frontitem|
 
@@ -21,26 +17,20 @@
 
 
 .row.expanded
-  .small-12.medium-12.columns.blue_green_box.smaller.text-right
+  .small-12.medium-12.columns.blue_green_box.smaller.text-center
     = link_to 'art', special_path('copacetic-select')
     = raw "&sdot;"
     = link_to 'books', books_path
     = raw "&sdot;"
     = link_to 'comics', comics_path
-    .hide-for-small-only.medium-6.columns.text-left
-      = raw "&sdot;"
-      = link_to 'dvds', dvds_path
-      = raw "&mdash;"
-      = link_to 'cds', cds_path
-      = raw "&sdot;"  
-      = link_to 'etc', special_path('copacetic-select')
-  .small-12.columns.blue_green_box.smaller.show-for-small-only
+
     = raw "&sdot;"
     = link_to 'dvds', dvds_path
     = raw "&mdash;"
     = link_to 'cds', cds_path
     = raw "&sdot;"  
-    = link_to 'etc', special_path('copacetic-select') 
+    = link_to 'etc', special_path('copacetic-select')
+
 
 .row.expanded.front_content
   .small-6.columns

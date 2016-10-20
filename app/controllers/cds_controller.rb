@@ -21,9 +21,9 @@ class CdsController < ApplicationController
   def index
     set_meta_tags :title => 'Music'
     @featured = Special.find_by(name: 'FEATURED ITEM').cds.order(updated_at: :desc)
-    @labels = Label.includes(:cds).where("cds.id is not null")
-    #   @creators = Comic.find_by_sql("SELECT cr.id, IF(cr.firstname IS NULL, cr.lastname, CONCAT(cr.firstname, ' ', cr.lastname)) AS fullname , count(cc.comic_id) FROM creators_comics cc, creators cr WHERE cr.id = cc.creator_id GROUP BY firstname, lastname HAVING (count(cc.comic_id) >= 3)  ORDER BY cr.lastname")
-    @specials = Special.joins(:cds).where("cds.id is not null")
+    @labels = Label.includes(:cds).where("cds.id is not null").uniq.sort_by(&:name)
+
+    @specials = Special.joins(:cds).where("cds.id is not null").uniq.sort_by(&:name)
     @items = apply_scopes(Cd).includes(:justin).order("justins.day DESC").page(params[:page]).per(32)
     respond_to do |format|
       format.html {     render :template => 'shared/category_frontpage' }

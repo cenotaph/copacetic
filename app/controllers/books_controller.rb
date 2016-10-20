@@ -40,11 +40,11 @@ class BooksController < ApplicationController
   def index
     set_meta_tags :title => 'Books'
     @featured = Special.find_by(name: 'FEATURED ITEM').books.order(updated_at: :desc)
-    @publishers = Publisher.joins(:books).where('books.id is not null')
+    @publishers = Publisher.joins(:books).where('books.id is not null').uniq.sort_by(&:name)
     @creators = Book.find_by_sql("SELECT cr.id, IF(cr.firstname IS NULL, cr.lastname, CONCAT(cr.firstname, ' ', cr.lastname)) AS fullname , count(cb.book_id) FROM creators_books cb, creators cr WHERE cr.id = cb.creator_id GROUP BY lastname HAVING (count(cb.book_id) >= 1)  ORDER BY cr.lastname")
    # @serials = Book.find_by_sql("SELECT DISTINCT  s.id, s.name FROM serials_books sb, serials s WHERE sb.serial_id = s.id ORDER BY name")
     # @specials = Book.find_by_sql("SELECT DISTINCT s.id, s.name FROM specials_books sb, specials s WHERE sb.special_id = s.id AND name != 'FEATURED ITEM' AND name != 'SHOW ON FRONT PAGE' ORDER BY name")
-    @specials = Special.joins(:books).where('books.id is not null')
+    @specials = Special.joins(:books).where('books.id is not null').uniq.sort_by(&:name)
     @items = apply_scopes(Book).includes(:justin).order("justins.day DESC").page(params[:page]).per(32)
     respond_to do |format|
       format.html {     render :template => 'shared/category_frontpage' }

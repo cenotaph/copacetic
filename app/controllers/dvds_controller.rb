@@ -23,11 +23,10 @@ class DvdsController < InheritedResources::Base
   def index
     set_meta_tags :title => 'Film and Video'
     @featured = Special.find_by(name: 'FEATURED ITEM').dvds.order(updated_at: :desc)
-    @publishers = Publisher.joins(:dvds).where("dvds.id is not null")
-    @directors = Director.all
-   # @serials = Book.find_by_sql("SELECT DISTINCT  s.id, s.name FROM serials_books sb, serials s WHERE sb.serial_id = s.id ORDER BY name")
-    # @specials = Book.find_by_sql("SELECT DISTINCT s.id, s.name FROM specials_books sb, specials s WHERE sb.special_id = s.id AND name != 'FEATURED ITEM' AND name != 'SHOW ON FRONT PAGE' ORDER BY name")
-    @specials = Special.joins(:dvds).where("dvds.id is not null")
+    @publishers = Publisher.joins(:dvds).where("dvds.id is not null").uniq.sort_by(&:name)
+    @directors = Director.all.sort_by(&:lastname)
+
+    @specials = Special.joins(:dvds).where("dvds.id is not null").uniq.sort_by(&:name)
     @items = apply_scopes(Dvd).includes(:justin).order("justins.day DESC").page(params[:page]).per(32)
     respond_to do |format|
       format.html {     render :template => 'shared/category_frontpage'}

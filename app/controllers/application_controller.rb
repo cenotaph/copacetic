@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
    
    def frontpage
      @frontitems = Frontitem.all.order(:position)
-     @post = Post.published.limit(1).first
+     @post = Post.published.order(created_at: :desc).limit(1).first
      @selects = Special.friendly.find('copacetic-select').instock.shuffle[0..9]
      render :template => 'shared/frontpage'
    end

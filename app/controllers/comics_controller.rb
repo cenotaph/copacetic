@@ -29,10 +29,11 @@ class ComicsController < InheritedResources::Base
       
   #  @featured = Comic.find(:all, :include => 'specials', :conditions => [ 'special_id = 7'])
     @featured = Special.find_by(name: 'FEATURED ITEM').comics.order(updated_at: :desc)
-    @publishers = Publisher.joins(:comics).where("comics.id is not null")
+    @publishers = Publisher.joins(:comics).where("comics.id is not null").uniq.sort_by(&:name)
     #   @creators = Comic.find_by_sql("SELECT cr.id, IF(cr.firstname IS NULL, cr.lastname, CONCAT(cr.firstname, ' ', cr.lastname)) AS fullname , count(cc.comic_id) FROM creators_comics cc, creators cr WHERE cr.id = cc.creator_id GROUP BY firstname, lastname HAVING (count(cc.comic_id) >= 3)  ORDER BY cr.lastname")
-    @serials = Comic.find_by_sql("SELECT DISTINCT  s.id, s.name FROM serials_comics sc, serials s WHERE sc.serial_id = s.id ORDER BY name")
-    @specials = Special.joins(:comics).where("comics.id is not null")
+    # @serials = Comic.find_by_sql("SELECT DISTINCT  s.id, s.name FROM serials_comics sc, serials s WHERE sc.serial_id = s.id ORDER BY name").uniq.sort_by(&:name)
+    @serials = Serial.joins(:comics).where("comics.id is not null").uniq.sort_by(&:name)
+    @specials = Special.joins(:comics).where("comics.id is not null").uniq.sort_by(&:name)
     @items = apply_scopes(Comic).includes(:justin).order("justins.day DESC").page(params[:page]).per(32)
     respond_to do |format|
       format.html { render :template => 'shared/category_frontpage' }
