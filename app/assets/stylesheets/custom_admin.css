@@ -1,11 +1,13 @@
-#comic_serials_input ol.choices-group {
+li#comic_serials_input ol.choices-group {
   display: none;
 }
 
-#comic_specials_input ol.choices-group {
+li#comic_specials_input ol.choices-group {
   display: none;
 }
-
+li#book_specials_input ol.choices-group {
+  display: none;
+}
 .hide_show {
   padding: 0px 0px 10px 10px;
   margin-top: 5px;

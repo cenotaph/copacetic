@@ -67,7 +67,7 @@ class Cd < ActiveRecord::Base
    end
    
    def label_name=(name)
-     self.label = Label.find_or_create_by_name(name.strip)
+     self.label = Label.find_or_create_by(name: name.strip)
    end 
     
    def icon

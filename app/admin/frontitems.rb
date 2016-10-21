@@ -17,5 +17,10 @@ ActiveAdmin.register Frontitem do
 
   end
   
+  index :as => :grid do |fi|
+    link_to image_tag(fi.item.image.url(:frontgrid)),  edit_admin_frontitem_path(fi)
+ 
+  end
+  
     menu :label => "Front grid"  
 end

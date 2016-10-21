@@ -85,7 +85,7 @@ class Comic < ActiveRecord::Base
   def autosave_associated_records_for_creators
     creators.each do |creator|
       if creator.id.nil?
-        new_creator = Creator.find_or_create_by_firstname_and_lastname(creator.firstname, creator.lastname) unless creator.firstname.blank? || creator.marked_for_destruction?
+        new_creator = Creator.find_or_create_by(firstname: creator.firstname, lastname: creator.lastname) unless creator.firstname.blank? || creator.marked_for_destruction?
         creator.id = new_creator.id
         self.creators << new_creator
       elsif creator.changed_for_autosave? && !creator.marked_for_destruction?
@@ -157,10 +157,10 @@ class Comic < ActiveRecord::Base
     if name =~ /\,/
       names = name.split(/\,/)
       names.each do |n|
-            self.serials << Serial.find_or_create_by_name(n.strip)
+            self.serials << Serial.find_or_create_by(name: n.strip)
       end
     else
-      self.serials << Serial.find_or_create_by_name(name.strip)
+      self.serials << Serial.find_or_create_by(name: name.strip)
     end  
   end
   
@@ -183,36 +183,6 @@ class Comic < ActiveRecord::Base
   end
   
 
-  
-  # def creator_names=(name)
-  #   self.creators = []
-  #   
-  #   if name =~ /\,/
-  #     names = name.split(/\,/)
-  #     names.each do |n|
-  #       if n.strip =~ /\s/
-  #           pieces = n.split
-  #           self.creators << Creator.find_or_create_by_firstname_and_lastname(pieces[0].strip, 
-  #           pieces[2] ? 
-  #           pieces[1].strip + " " + pieces[2].strip : 
-  #           pieces[1].strip)
-  #       else
-  #           self.creators << Creator.find_or_create_by_lastname(n.strip)
-  #       end   
-  #     end
-  #   elsif name.blank?
-  #     self.creators = []
-  #   else
-  #       if name.strip  =~ /\s/
-  #           pieces = name.split
-  #           self.creators << Creator.find_or_create_by_firstname_and_lastname(pieces[0].strip, pieces[2] ? pieces[1] + " " + pieces[2].strip : pieces[1].strip)
-  #       else
-  #           self.creators << Creator.find_or_create_by_lastname(name.strip)
-  #       end
-  #   end
-  #   
-  # end
-  #   
   def icon
     if self.image.blank?
       return "/images/missing_image.png"
@@ -235,7 +205,7 @@ class Comic < ActiveRecord::Base
   end
   
   def publisher_name=(name)
-    self.publisher = Publisher.find_or_create_by_name(name)
+    self.publisher = Publisher.find_or_create_by(name: name)
   end  
   
   def title_with_issue 

@@ -3,11 +3,11 @@
   =  f.inputs "Name and categories" do
     = f.input :title
     = f.input :issue
-    = f.input :publisher
-    = f.input :specials,  :as => :check_boxes
+    = f.input :publisher, collection: Publisher.order(:name)
+    = f.input :specials,  :as => :check_boxes, collection: Special.order(:name)
     = f.input :include_front_grid, :as => :boolean,  :label => 'Show in front grid'   , :input_html => {:checked => @comic.in_front_grid}
     .hide_show= link_to 'Toggle hide/show specials', '#', :onclick => 'javascript:$("#comic_specials_input ol.choices-group").toggle(); '
-    = f.input :serials, :as => :check_boxes
+    = f.input :serials, :as => :check_boxes, collection: Serial.order(:name)
     .hide_show= link_to 'Toggle hide/show serials', '#', :onclick => 'javascript:$("#comic_serials_input ol.choices-group").toggle();'
   = f.inputs "Creators", :class => "half inputs" do
     = f.fields_for :creators do |ff|

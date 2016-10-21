@@ -18,13 +18,13 @@ ActiveAdmin.register Book do
     end
     
     def permitted_params
-      params.permit(:book => [:title, :published_id, :hardcover, :pagecount, :listprice, :price, 
-        :fiction, :dateadded, :instock, :description, :isbn, :ean, :numbersold, :image, :shortdesc, 
-      :justin_id, :tinydesc, :weight, :slug])
-      # params.permit! # allow all parameters
+      params.permit(:book => [:title, :publisher_id, :hardcover, :pagecount, :listprice, :price, 
+        :fiction, :dateadded, :instock, :description, :isbn, :ean, :numbersold, :image, :shortdesc, :include_front_grid,
+      :justin_id, :tinydesc, :weight, :slug, :remove_image, special_ids: [], creators_attributes: [:firstname, :lastname, :_destroy, :id]
+      ])
     end
     
-    autocomplete :creator, :firstname, :display_value => :fullname, :extra_data => [:firstname, :lastname] 
+     autocomplete :creator, :firstname, :display_value => :fullname, :extra_data => [:firstname, :lastname]
     # autocomplete :creator, :firstname, :extra_data => [:lastname], :display_value => :fullname
   end
   

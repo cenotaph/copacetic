@@ -83,12 +83,12 @@ class Dvd < ActiveRecord::Base
            names.each do |n|
              if n.strip =~ /\s/
                  pieces = n.split
-                 self.directors << Director.find_or_create_by_firstname_and_lastname(pieces[0].strip, 
+                 self.directors << Director.find_or_create_by(firstname: pieces[0].strip, lastname: 
                  pieces[2] ? 
                  pieces[1].strip + " " + pieces[2].strip : 
                  pieces[1].strip)
              else
-                 self.directors << Director.find_or_create_by_lastname(n.strip)
+                 self.directors << Director.find_or_create_by(lastname: n.strip)
              end   
            end
        elsif name.blank?
@@ -96,9 +96,9 @@ class Dvd < ActiveRecord::Base
         else
            if name.strip  =~ /\s/
                pieces = name.split
-               self.directors << Director.find_or_create_by_firstname_and_lastname(pieces[0].strip, pieces[2] ? pieces[1] + " " + pieces[2].strip : pieces[1].strip)
+               self.directors << Director.find_or_create_by(firstname: pieces[0].strip, lastname: pieces[2] ? pieces[1] + " " + pieces[2].strip : pieces[1].strip)
            else
-                self.directors << Director.find_or_create_by_lastname(name.strip)
+                self.directors << Director.find_or_create_by(lastname: name.strip)
            end
        end
    end
@@ -153,7 +153,7 @@ class Dvd < ActiveRecord::Base
    end
 
    def publisher_name=(name)
-     self.publisher = Publisher.find_or_create_by_name(name)
+     self.publisher = Publisher.find_or_create_by(name: name)
    end
    
    

@@ -45,7 +45,7 @@ class Book < ActiveRecord::Base
   def autosave_associated_records_for_creators
     creators.each do |creator|
       if creator.id.nil?
-        new_creator = Creator.find_or_create_by_firstname_and_lastname(creator.firstname, creator.lastname) unless creator.firstname.blank? || creator.marked_for_destruction?
+        new_creator = Creator.find_or_create_by(firstname: creator.firstname, lastname: creator.lastname) unless creator.firstname.blank? || creator.marked_for_destruction?
         creator.id = new_creator.id
         self.creators << new_creator
       elsif creator.changed_for_autosave? && !creator.marked_for_destruction?
@@ -116,12 +116,12 @@ class Book < ActiveRecord::Base
          names.each do |n|
            if n.strip =~ /\s/
                pieces = n.split
-               self.creators << Creator.find_or_create_by_firstname_and_lastname(pieces[0].strip, 
+               self.creators << Creator.find_or_create_by(firstname: pieces[0].strip, lastname:
                pieces[2] ? 
                pieces[1].strip + " " + pieces[2].strip : 
                pieces[1].strip)
            else
-               self.creators << Creator.find_or_create_by_lastname(n.strip)
+               self.creators << Creator.find_or_create_by(lastname: n.strip)
            end   
          end
        elsif name.blank?
@@ -129,9 +129,9 @@ class Book < ActiveRecord::Base
         else
            if name.strip  =~ /\s/
                pieces = name.split
-               self.creators << Creator.find_or_create_by_firstname_and_lastname(pieces[0].strip, pieces[2] ? pieces[1] + " " + pieces[2].strip : pieces[1].strip)
+               self.creators << Creator.find_or_create_by(firstname: pieces[0].strip, lastname: pieces[2] ? pieces[1] + " " + pieces[2].strip : pieces[1].strip)
            else
-               self.creators << Creator.find_or_create_by_lastname(name.strip)
+               self.creators << Creator.find_or_create_by(lastname: name.strip)
            end
        end
 
@@ -166,7 +166,7 @@ class Book < ActiveRecord::Base
   end
 
   def publisher_name=(name)
-    self.publisher = Publisher.find_or_create_by_name(name)
+    self.publisher = Publisher.find_or_create_by(name: name)
   end
   
   def issuer_credit

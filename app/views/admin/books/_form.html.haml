@@ -2,9 +2,10 @@
 
   =  f.inputs "Name and categories" do
     = f.input :title
-    = f.input :publisher
-    = f.input :specials,  :as => :check_boxes
+    = f.input :publisher, collection: Publisher.order(:name)
     = f.input :include_front_grid, :as => :boolean,  :label => 'Show in front grid'   , :input_html => {:checked => @book.in_front_grid}    
+    = f.input :specials,  :as => :check_boxes, collection: Special.order(:name)
+    
     .hide_show= link_to 'Toggle hide/show specials', '#', :onclick => 'javascript:$("#book_specials_input ol.choices-group").toggle();'
     = f.input :fiction
     = f.input :hardcover

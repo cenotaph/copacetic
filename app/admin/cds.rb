@@ -17,7 +17,7 @@ ActiveAdmin.register Cd do
     end
     
     def permitted_params
-      params.permit(:cd => [:title, :artist, :label_id, :numofdiscs, :genre_id, :listprice, :price, :dateadded, :instock, :description,
+      params.permit(:cd => [:title, :artist, :label_id, :numofdiscs, :genre_id, :listprice, :price, :dateadded, :instock, :description, :include_front_grid,
         :numbersold, :justin_id, :shortdesc, :tinydesc, :image, :catno, :keywords, :weight, :slug])
       # params.permit! # allow all parameters
     end

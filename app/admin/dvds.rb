@@ -19,8 +19,9 @@ ActiveAdmin.register Dvd do
     
     def permitted_params
       params.permit(:dvd => [:title, :director, :director_id, :year, :country, :published_id, :listprice,
-                             :price, :dateadded, :instock, :description, :numbersold, :shortdesc, :justin_id,
-                             :image, :tinydesc, :weight, :slug])
+                             :price, :dateadded, :instock, :description, :numbersold, :shortdesc, :justin_id, :include_front_grid,
+                             :image, :tinydesc, :weight, :slug,
+                             :remove_image, special_ids: [], directors_attributes: [:firstname, :lastname, :_destroy, :id]])
       # params.permit! # allow all parameters
     end
     
