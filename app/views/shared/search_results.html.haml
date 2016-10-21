@@ -7,4 +7,5 @@
       = paginate @items, :remote => true
       /.change_link= link_to '(change)', '#', :onclick => "$('.outofstock').fadeToggle(); $('.toggle').html($('.toggle').html() == 'Showing in stock items' ? 'Showing all items, including out of stock' : 'Showing in stock items');"
     #items{:style => "clear: both"}= render :partial => 'shared/search_results', :locals => {:items => @items.flatten.compact}
-    = paginate @items, :remote => true
+.row.expanded
+  .small-12.columns.filters#pbottom= paginate @items, :remote => true

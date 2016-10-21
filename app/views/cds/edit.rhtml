@@ -1,9 +1,0 @@
-<h1>Editing cd</h1>
-
-<% form_for(@cd, :url => cd_path(@cd), :html => { :method => :put,
-  :name => "newitem",  :multipart=> true  }) do %>
-  <%= render :partial => 'layouts/editform', :locals => {:itemtype => 'cd', :item => @cd } %>
-<% end %>
-
-<%= link_to 'Show', :action => 'show', :id => @cd %> |
-<%= link_to 'Back', :action => 'list' %>

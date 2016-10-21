@@ -1,9 +1,0 @@
-<h1>New cd</h1>
-
-<% form_tag ({:action => 'create'}, :name => "newitem", :multipart => true ) do %>
-  <%= render :partial => 'layouts/editform', :locals => {:itemtype => 'cd', :item => @cd } %>
- <p>
-
-<% end %>
-
-<%= link_to 'Back', :action => 'list' %>

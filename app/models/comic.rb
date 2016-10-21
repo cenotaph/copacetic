@@ -72,7 +72,11 @@ class Comic < ActiveRecord::Base
   scope :by_publisher, lambda {|s| joins(:publisher).where("comics.publisher_id = ?", s) }
   
   def creator_names
-    creators.sort{|x,y| y.items.size <=> x.items.size }.collect{|x| x.fullname }.join(', ') if creators
+     if creators
+       creators.sort{|x,y| y.items.size <=> x.items.size }.collect{|x| x.fullname }.join(', ')
+     else
+       ''
+     end
   end
   
   def creator_alone

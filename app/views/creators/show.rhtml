@@ -1,8 +1,0 @@
-<% for column in Creator.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @creator.send(column.name) %>
-</p>
-<% end %>
-
-<%= link_to 'Edit', :action => 'edit', :id => @creator %> |
-<%= link_to 'Back', :action => 'list' %>

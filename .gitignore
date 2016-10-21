@@ -3,6 +3,7 @@ capybara-*.html
 .rspec
 /log
 /tmp
+/db/
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /public/system
@@ -44,3 +45,4 @@ config/application.yml
 config/deploy/*
 config/deploy.rb
 Capfile
+config/development.sphinx.conf

@@ -830,9 +830,26 @@ span.small_link {
   padding: 2px;
   background-color: #edffed;
   border-bottom: 5px solid $blue;
+  &#pagination, &#pbottom {
+    border-bottom: none;
+  }
   color: black;
   .toggle { float: left; }
   .change_link { font-size: 9pt;margin-left: 15px; float: left;}
+
+  nav.pagination {
+    span{
+      color: $darkblue;
+      &.current {
+        color: white;
+      }
+    }
+    a {
+      color: $darkblue;
+      border: 1px solid $darkblue;
+    }
+
+  }
 }
 
 .sidebar_title {

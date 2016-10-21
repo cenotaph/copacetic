@@ -62,7 +62,10 @@ gem 'omniauth-facebook'
 gem 'rails-jquery-autocomplete'
 gem 'randumb'
 
-gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
+# gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
+
+gem 'thinking-sphinx', '~> 3.2.0'
+
 gem 'truncate_html'
 gem 'twitter', '4.4.4'
 

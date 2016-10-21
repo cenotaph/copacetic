@@ -1,28 +1,32 @@
 class SearchesController < ApplicationController
   
   def create
-    @items = []
-    @items << ComicFilter.new.filter(Comic.instock, params[:query])
-    @items << BookFilter.new.filter(Book.instock, params[:query])
-    @items << DvdFilter.new.filter(Dvd.instock, params[:query])
-    @items << CreatorFilter.new.filter(Creator, params[:query]).try(:items)
-    @items << CdFilter.new.filter(Cd.instock, params[:query])
-    @items << DirectorFilter.new.filter(Director, params[:query]).try(:dvds)
-    
-    @items = Kaminari.paginate_array(@items.flatten.compact).page(params[:page]).per(32)
+    @items = ThinkingSphinx.search ThinkingSphinx::Query.escape(params[:query]), :classes => [Comic, Book, Dvd, Cd], field_weights: {
+        title: 10,
+        description: 5 }
+    creators_and_directors = ThinkingSphinx.search ThinkingSphinx::Query.escape(params[:query]), :classes => [Director, Creator],  field_weights: {
+        lastname: 10,
+        firstname: 8, description: 5 }
+    unless creators_and_directors.empty?
+      other_items = creators_and_directors.map(&:items).uniq
+    end
+
+    @items = Kaminari.paginate_array([@items, other_items].flatten.compact.uniq).page(params[:page]).per(32)
     render 'shared/search_results'
   end
   
   def index
-    @items = []
-    @items << ComicFilter.new.filter(Comic.instock, params[:query])
-    @items << BookFilter.new.filter(Book.instock, params[:query])
-    @items << DvdFilter.new.filter(Dvd.instock, params[:query])
-    @items << CreatorFilter.new.filter(Creator, params[:query]).try(:items)
-    @items << CdFilter.new.filter(Cd.instock, params[:query])
-    @items << DirectorFilter.new.filter(Director, params[:query]).try(:dvds)
-    
-    @items = Kaminari.paginate_array(@items.flatten.compact).page(params[:page]).per(32)
+    @items = ThinkingSphinx.search ThinkingSphinx::Query.escape(params[:query]), :classes => [Comic, Book, Dvd, Cd], field_weights: {
+        title: 10,
+        description: 5 }
+    creators_and_directors = ThinkingSphinx.search ThinkingSphinx::Query.escape(params[:query]), :classes => [Director, Creator],  field_weights: {
+        lastname: 10,
+        firstname: 8, description: 5 }
+    unless creators_and_directors.empty?
+      other_items = creators_and_directors.map(&:items).uniq
+    end
+
+    @items = Kaminari.paginate_array([@items, other_items].flatten.compact.uniq).page(params[:page]).per(32)
     if !request.xhr?
       render 'shared/search_results'
     end
