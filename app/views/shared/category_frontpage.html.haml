@@ -34,7 +34,7 @@
 .row.expanded
   .small-12.columns
     #index_grid= render :partial => 'shared/category_grid', :locals => {:items => @items}
-    .paginator= paginate @items, :remote => true
+  .small-12.columns.browse_title.paginator= paginate @items, :remote => true
 
   :javascript
     $('.pagination a').on('click', function(e) {

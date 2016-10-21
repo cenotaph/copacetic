@@ -1,5 +1,5 @@
 .row.expanded
-  .small-6.medium-3.columns
+  .small-6.medium-4.columns.text-right
     - if @item.image?
       .item_image= image_tag @item.image.url(:medium)
     - unless @item.price.blank?
@@ -27,12 +27,12 @@
       - else
         %p
           %span{:style => "color: RED; font-size: 0.8em;"} OUT OF STOCK!
-  .small-6.medium-9.columns
-    .item_metadata.eight.columns.omega
+  .small-6.medium-8.columns.text-left
+    .item_metadata.columns
       .item_title
         = @item.display_title
         - if current_admin_user
-          = link_to '(Edit this entry!!)', "/admin/#{@item.class.to_s.tableize}/#{@item.id}/edit", :style => 'padding-left: 15px;'
+          = link_to 'Edit this entry!', "/admin/#{@item.class.to_s.tableize}/#{@item.id}/edit", :style => 'padding-left: 15px;', class: [:button, :tiny]
       .item_author= raw @item.authorship
       - unless @item.issuer_credit.blank?
         .item_issuer= @item.issuer_credit

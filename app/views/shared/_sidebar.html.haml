@@ -12,29 +12,34 @@
 .row.expanded.just_in
   .small-12.columns
     .sidebar_title.clear_top Just in:
-    .scrollable
-      - Justin.published.order('day desc').first.items.sort{rand}[0..9].in_groups_of(2).each do |group|
-        .scroll_item
-          - group.each_with_index do |item, index|
-            - next if item.nil?
-            .columns.large-6.medium-12{class: index == 1 ? 'show-for-large' : false }
-              .scroll_image= image_tag item.image_url(:index)
-              .scroll_metadata
-                .scroll_title= link_to item.title, item
-                .scroll_author= raw item.authorship_short
-                .scroll_price= number_to_currency(item.price)
-                %strong= link_to 'See all recent arrivals...', '/just_in'
+    .sidebar-orbit{role: :sidebar, :'aria-label' => 'Just in!', :'data-orbit' => ''}
+      %ul.orbit-container
+        - Justin.published.order('day desc').first.items.sort{rand}[0..9].in_groups_of(2).each do |group|
+          %li.orbit-slide
+            %ul.small-up-1.medium-up-2
+              - group.each_with_index do |item, index|
+                - next if item.nil?
+                %li.justin_slide.column{class: index == 1 ? 'show-for-large' : false }
+                  .scroll_image= image_tag item.image_url(:index)
+                  .scroll_metadata
+                    .scroll_title= link_to item.title, item
+                    .scroll_author= raw item.authorship_short
+                    .scroll_price= number_to_currency(item.price)
+  .small-12.columns
+    %strong= link_to 'See all recent arrivals...', '/just_in'
 
 .row.expanded
   .small-12.columns
     .sidebar_title.clear_top= link_to 'Copacetica', '/copacetica'
     Edifiying essays about all things Copacetic
  
-    .paypal= image_tag 'paypal.gif'
+    .paypal= image_tag image_path('paypal.gif')
+    .paypal
+      %strong= link_to 'Follow us on Instagram', 'https://www.instagram.com/copaceticcomics/'
 
-%iframe{:class => :btn, :frameborder => 0, :border => 0, :scrolling => :no, :allowtransparency => true, :height => 25, :width => 157,  :src =>  "http://platform.tumblr.com/v1/follow_button.html?button_type=1&tumblelog=copcomco&color_scheme=light"}
+%iframe{:class => :btn, :frameborder => 0, :border => 0, :scrolling => :no, :allowtransparency => true, :height => 25, :width => 157, style: 'margin-left: 1rem', :src =>  "http://platform.tumblr.com/v1/follow_button.html?button_type=1&tumblelog=copcomco&color_scheme=light"}
 
-.fb-like-box{"data-href" => "http://www.facebook.com/pages/The-Copacetic-Comics-Company/132379686783143",  "data-width" => "230", "data-show-faces" => "true", "data-stream" => "false",  "data-header" => "false"}
+.fb-like-box{"data-href" => "http://www.facebook.com/pages/The-Copacetic-Comics-Company/132379686783143",  "data-width" => "230", "data-show-faces" => "true", "data-stream" => "false",  "data-header" => "false", style: 'margin-left: 1rem'}
 
 .row.expanded
   .small-12.columns
@@ -42,15 +47,12 @@
     %ul
     %li= link_to 'Lili Coffee', 'http://www.facebook.com/pages/Lili-CoffeeShop/135261526501378'
     %li= link_to 'Cruel Noise Records', 'https://www.facebook.com/CruelNoiseRecords/'
-    :javascript
-      $(document).ready(function() {
-        $(".scrollable").cycle({
-          fx: 'fade' });  
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=258774570894773";
-          fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-      });
+= content_for :jquery do
+  :plain
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=258774570894773";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
