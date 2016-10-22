@@ -6,9 +6,9 @@
     = f.input :publisher, collection: Publisher.order(:name)
     = f.input :specials,  :as => :check_boxes, collection: Special.order(:name)
     = f.input :include_front_grid, :as => :boolean,  :label => 'Show in front grid'   , :input_html => {:checked => @comic.in_front_grid}
-    .hide_show= link_to 'Toggle hide/show specials', '#', :onclick => 'javascript:$("#comic_specials_input ol.choices-group").toggle(); '
+    .hide_show= link_to 'Toggle hide/show specials', '#', :onclick => 'javascript:$("#comic_specials_input ol.choices-group").toggle();return false;'
     = f.input :serials, :as => :check_boxes, collection: Serial.order(:name)
-    .hide_show= link_to 'Toggle hide/show serials', '#', :onclick => 'javascript:$("#comic_serials_input ol.choices-group").toggle();'
+    .hide_show= link_to 'Toggle hide/show serials', '#', :onclick => 'javascript:$("#comic_serials_input ol.choices-group").toggle();return false;'
   = f.inputs "Creators", :class => "half inputs" do
     = f.fields_for :creators do |ff|
       - if ff.object.new_record? && !ff.options[:child_index].nil?
@@ -26,10 +26,10 @@
     = f.input :image, :label => (f.object.image? ? 'Change image' : 'Choose image')
   = f.inputs "Descriptions (at least one is mandatory)", :class => "full inputs" do
     = f.input :tinydesc, :label => 'Tiny brief'
-    .hide_show= link_to 'Toggle hide/show short description', 'javascript:$("#shortdesc").toggle();'
+    .hide_show= link_to 'Toggle hide/show short description', 'javascript:$("#shortdesc").toggle();return false;'
     %h4 Short description
     #shortdesc{:style => (@comic.shortdesc.blank? ? 'display: hidden' : 'display: block')}= f.cktext_area :shortdesc
-    .hide_show= link_to 'Toggle hide/show full description', 'javascript:$("#description").toggle();'       
+    .hide_show= link_to 'Toggle hide/show full description', 'javascript:$("#description").toggle();return false;'       
     %h4 Full description
     #description= f.cktext_area :description
   = f.inputs "Minutiae", :class => "half inputs" do

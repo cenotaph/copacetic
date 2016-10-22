@@ -31,3 +31,19 @@ fieldset.full {
   border-bottom: 1px dotted blue;
   margin-bottom: 25px;
 }
+
+#active_admin_content form  li{
+  list-style-type: none;
+  padding: 1.5rem 0;
+}
+
+#active_admin_content form label {
+  font-size: 1.2rem;
+}
+
+#active_admin_content form ol.choices-group li {
+  padding: 0.2rem 0;
+}
+#active_admin_content form ol.choices-group li label {
+  font-size: 1rem;
+}

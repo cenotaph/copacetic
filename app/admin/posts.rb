@@ -16,11 +16,11 @@ ActiveAdmin.register Post do
     end
     
     def permitted_params
-      params.permit(:blog  => [:title, :body, :admin_user_id, :slug])
+      params.permit(:post  => [:title, :body, :admin_user_id, :slug])
       # params.permit! # allow all parameters
     end
 
     autocomplete :creator, :firstname, :display_value => :fullname, :extra_data => [:firstname, :lastname] #,   
   end
-  
+
 end
