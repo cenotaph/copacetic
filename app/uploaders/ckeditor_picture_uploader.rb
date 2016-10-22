@@ -21,14 +21,13 @@ class CkeditorPictureUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
+  # Process files as they are uploaded:a
   # process :scale => [200, 300]
   #
   # def scale(width, height)
   #   # do something
   # end
   
-  process :read_dimensions
 
   # Create different versions of your uploaded files:
   version :thumb do
