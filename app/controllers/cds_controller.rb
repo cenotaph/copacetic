@@ -21,7 +21,7 @@ class CdsController < ApplicationController
   def index
     set_meta_tags :title => 'Music'
     @featured = Special.find_by(name: 'FEATURED ITEM').cds.order(updated_at: :desc)
-    @labels = Label.includes(:cds).where("cds.id is not null").uniq.sort_by(&:name)
+    @labels = Label.includes(:cds).sort_by(&:name).uniq
 
     @specials = Special.joins(:cds).where("cds.id is not null").uniq.sort_by(&:name)
     @items = apply_scopes(Cd).includes(:justin).order("justins.day DESC").page(params[:page]).per(32)
