@@ -13,7 +13,7 @@ module Copacetic
     # -- all .rb files in that directory are automatically loaded.
 
     config.assets.precompile += Ckeditor.assets
-    config.assets.precompile += %w( ckeditor/* )
+  
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     config.assets.precompile += %w(admin/active_admin.css  admin/custom_aa.js custom_admin.css) 
 

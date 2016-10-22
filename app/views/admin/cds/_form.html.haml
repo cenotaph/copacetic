@@ -19,10 +19,10 @@
     = f.input :tinydesc, :label => 'Tiny brief'
     .hide_show= link_to 'Toggle hide/show short description', 'javascript:$("#shortdesc").toggle();'
     %h4 Short description
-    #shortdesc{:style => (@cd.shortdesc.blank? ? 'display: hidden' : 'display: block')}= f.cktext_area :shortdesc
+    #shortdesc{:style => (@cd.shortdesc.blank? ? 'display: hidden' : 'display: block')}= f.input :shortdesc,  :as => :ckeditor
     .hide_show= link_to 'Toggle hide/show full description', 'javascript:$("#description").toggle();'       
     %h4 Full description
-    #description= f.cktext_area :description
+    #description= f.input :description,  :as => :ckeditor
   = f.inputs "Minutiae", :class => "half inputs" do
     = f.input :numofdiscs
     = f.input :catno
