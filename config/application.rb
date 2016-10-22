@@ -15,6 +15,8 @@ module Copacetic
     config.assets.precompile += Ckeditor.assets
     config.assets.precompile += %w( ckeditor/* )
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    config.assets.precompile += %w(admin/active_admin.css  admin/custom_aa.js custom_admin.css) 
+
    # actionmailer
   # Disable delivery errors, bad email addresses will be ignored
   end
