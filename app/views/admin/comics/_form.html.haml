@@ -26,10 +26,10 @@
     = f.input :image, :label => (f.object.image? ? 'Change image' : 'Choose image')
   = f.inputs "Descriptions (at least one is mandatory)", :class => "full inputs" do
     = f.input :tinydesc, :label => 'Tiny brief'
-    .hide_show= link_to 'Toggle hide/show short description', 'javascript:$("#shortdesc").toggle();return false;'
+    .hide_show= link_to 'Toggle hide/show short description', '#', onclick: 'javascript:$("#shortdesc").toggle();return false;'
     %h4 Short description
     #shortdesc{:style => (@comic.shortdesc.blank? ? 'display: hidden' : 'display: block')}= f.cktext_area :shortdesc
-    .hide_show= link_to 'Toggle hide/show full description', 'javascript:$("#description").toggle();return false;'       
+    .hide_show= link_to 'Toggle hide/show full description', '#', onclick: 'javascript:$("#description").toggle();return false;'       
     %h4 Full description
     #description= f.cktext_area :description
   = f.inputs "Minutiae", :class => "half inputs" do
