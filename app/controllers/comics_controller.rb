@@ -4,6 +4,8 @@ class ComicsController < InheritedResources::Base
   has_scope :by_serial
   has_scope :by_creator
 
+  autocomplete :creator, :firstname, extra_data: [:lastname], display_value: :fullname, scopes: [:comic_creators]
+
   
   
   def auto_complete_for_comic_creator_names

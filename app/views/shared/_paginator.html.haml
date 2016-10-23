@@ -30,14 +30,16 @@
       .small-8.columns= collection_select :item, :label_filter, Label.all, :id, :display_title,  { :include_blank => true, :selected => params[:by_label] }, {:onchange => raw("document.location.href=document.location.href.substr(0,document.location.href.indexOf('?')) + '?by_label=' + $(this).val() + '&by_special=#{params[:by_special]}'") }
   .row.expanded
     .small-4.columns.text-right
-      = (controller.controller_name == 'dvds' ? 'Director' : 'Creator')
+      = (controller.controller_name == 'dvds' ? 'Director' :  (controller.controller_name == 'cds' ? 'Artist' : 'Creator'))
       name
     .small-8.columns
       = form_tag('/' + controller.controller_name, :id => 'creator_mask', :method => :get) do 
         - if controller.controller_name == 'dvds'
-          = autocomplete_field_tag 'by_director', params[:by_director], autocomplete_director_firstname_admin_dvds_path, :size => 75
+          = autocomplete_field_tag 'by_director', params[:by_director], autocomplete_director_firstname_dvds_path, :size => 75
+        - elsif controller.controller_name == 'cds'
+          = autocomplete_field_tag 'by_artist', params[:by_artist], autocomplete_cd_artist_cds_path, :size => 75
         - else
-          = autocomplete_field_tag 'by_creator', params[:by_creator], autocomplete_creator_firstname_admin_comics_path, :size => 75
+          = autocomplete_field_tag 'by_creator', params[:by_creator], autocomplete_creator_firstname_comics_path, :size => 75
 
 = content_for :jquery do
   :plain

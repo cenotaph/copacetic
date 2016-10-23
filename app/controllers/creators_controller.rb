@@ -1,5 +1,4 @@
-class CreatorsController < InheritedResources::Base
-  actions :show, :index
+class CreatorsController < ApplicationController
 
   def show
     @item = Creator.friendly.find(params[:id])

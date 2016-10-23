@@ -7,6 +7,8 @@ ActiveAdmin.register Comic do
     comics.where("instock is false")
   end
   
+  collection_action :autocomplete_creator_firstname, :method => :get
+  
   controller do
 
     def find_resource

@@ -36,10 +36,20 @@ Copacetic::Application.routes.draw do
   get '/copacetica' => 'articles#index'
   resources :users
   # match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => 
-  resources :comics
-  resources :books
-  resources :dvds
-  resources :cds
+  resources :comics do
+    get :autocomplete_creator_firstname, :on => :collection
+  end
+
+  resources :books do
+    get :autocomplete_creator_firstname, :on => :collection
+  end
+  resources :dvds do
+    get :autocomplete_director_firstname, :on => :collection
+  end
+  
+  resources :cds do
+    get :autocomplete_cd_artist, :on => :collection
+  end
   resources :creators
   resources :labels
   resources :directors

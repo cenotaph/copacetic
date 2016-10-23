@@ -193,7 +193,7 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
 
-
+  config.register_javascript 'autocomplete-rails.js'
   config.register_javascript 'ckeditor/init.js'
   # config.register_javascript 'ckeditor/ckeditor.js'
 

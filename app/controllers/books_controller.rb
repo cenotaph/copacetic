@@ -3,7 +3,8 @@ class BooksController < ApplicationController
   has_scope :by_publisher
   has_scope :by_creator
 
-
+  autocomplete :creator, :firstname, extra_data: [:lastname], display_value: :fullname, scopes: [:book_creators]
+  
   def add_comment
     @comment = Book.find(params[:id]).comments.create(params[:comment])
     @comment.date = Time.now

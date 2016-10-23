@@ -4,7 +4,9 @@ class Creator < ActiveRecord::Base
   # has_many :items, :through => :items_creators
   has_many :comics, through: :items_creators, source: :item, source_type: 'Comic'
   has_many :books, through: :items_creators, source: :item, source_type: 'Book'
-      
+    
+  scope :comic_creators, ->() { joins(:comics).where("comics.id is not null").uniq }
+  scope :book_creators, ->() { joins(:books).where("books.id is not null").uniq }
   
   extend FriendlyId
   friendly_id :fullname,  :use => :slugged  

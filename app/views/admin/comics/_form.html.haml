@@ -4,11 +4,14 @@
     = f.input :title
     = f.input :issue
     = f.input :publisher, collection: Publisher.order(:name)
-    = f.input :specials,  :as => :check_boxes, collection: Special.order(:name)
     = f.input :include_front_grid, :as => :boolean,  :label => 'Show in front grid'   , :input_html => {:checked => @comic.in_front_grid}
-    .hide_show= link_to 'Toggle hide/show specials', '#', :onclick => 'javascript:$("#comic_specials_input ol.choices-group").toggle();return false;'
+    .hide_show= link_to 'Toggle  specials', '#', :onclick => 'javascript:$("#comic_specials_input ol.choices-group").toggle();return false;', class: :button
+    = f.input :specials,  :as => :check_boxes, collection: Special.order(:name)
+
+ 
+    .hide_show= link_to 'Toggle  serials', '#', :onclick => 'javascript:$("#comic_serials_input ol.choices-group").toggle();return false;', class: :button 
     = f.input :serials, :as => :check_boxes, collection: Serial.order(:name)
-    .hide_show= link_to 'Toggle hide/show serials', '#', :onclick => 'javascript:$("#comic_serials_input ol.choices-group").toggle();return false;'
+    
   = f.inputs "Creators", :class => "half inputs" do
     = f.fields_for :creators do |ff|
       - if ff.object.new_record? && !ff.options[:child_index].nil?
@@ -16,8 +19,8 @@
       - else
         = ff.input :firstname
       = ff.input :lastname
-      = ff.link_to_remove 'remove this creator'   
-    = f.link_to_add 'add creator', :creators
+      = ff.link_to_remove 'remove this creator', class: :button  
+    = f.link_to_add 'add creator', :creators, class: :button 
   = f.inputs "Image", :class => "half inputs" do
     - if f.object.image?
       = image_tag f.object.image.url(:frontgrid)
@@ -25,11 +28,11 @@
       Delete image
     = f.input :image, :label => (f.object.image? ? 'Change image' : 'Choose image')
   = f.inputs "Descriptions (at least one is mandatory)", :class => "full inputs" do
-    = f.input :tinydesc, :label => 'Tiny brief'
-    .hide_show= link_to 'Toggle hide/show short description', '#', onclick: 'javascript:$("#shortdesc").toggle();return false;'
+    = f.input :tinydesc, :label => 'Tiny brief', class: :button 
+    .hide_show= link_to 'Toggle short description', '#', onclick: 'javascript:$("#shortdesc").toggle();return false;', class: :button 
     %h4 Short description
     #shortdesc{:style => (@comic.shortdesc.blank? ? 'display: hidden' : 'display: block')}= f.cktext_area :shortdesc
-    .hide_show= link_to 'Toggle hide/show full description', '#', onclick: 'javascript:$("#description").toggle();return false;'       
+    .hide_show= link_to 'Toggle full description', '#', onclick: 'javascript:$("#description").toggle();return false;', class: :button
     %h4 Full description
     #description= f.cktext_area :description
   = f.inputs "Minutiae", :class => "half inputs" do
@@ -37,9 +40,9 @@
     = f.input :dimensions
     = f.input :weight
   = f.inputs "Details", :class => "half inputs" do
-    = f.input :listprice
-    = f.input :price
-    = f.input :instock
-    = f.input :justin_id, :as => :select, :collection => Justin.all.sort{|x, y| y.day <=> x.day }
+    = f.input :listprice, label: 'List price:'
+    = f.input :price, label: 'Price:'
+    = f.input :instock, label: 'In stock?'
+    = f.input :justin_id, :as => :select, :collection => Justin.all.sort{|x, y| y.day <=> x.day }, label: 'Just in/update:'
     = f.actions do 
       = f.submit "Save"

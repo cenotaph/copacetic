@@ -3,6 +3,8 @@ class CdsController < ApplicationController
   has_scope :by_publisher
   has_scope :by_serial
   has_scope :by_creator
+  has_scope :by_artist
+  autocomplete :cd, :artist
   
   def auto_complete_for_cd_label_name
        @publishersearch = Label.find(:all, :conditions => ["lower(name) like lower(?)", "%#{params[:cd][:label_name]}%"], :order => 'name')

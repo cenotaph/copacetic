@@ -1,7 +1,9 @@
-class DvdsController < InheritedResources::Base
+class DvdsController < ApplicationController
   has_scope :by_special
   has_scope :by_publisher
   has_scope :by_director
+  
+  autocomplete :director, :firstname, extra_data: [:lastname], display_value: :fullname, scopes: [:by_uniq]
 
   def auto_complete_for_dvd_director_names
     search = params[:dvd][:director_names]

@@ -26,16 +26,16 @@ class Dvd < ActiveRecord::Base
   scope :by_publisher, ->(s)  {joins(:publisher).where("dvds.publisher_id = ?", s) }
        
       
-  def self.by_director(s)
+  scope :by_director, ->(s) {
     if s =~ /\w+\s\w+/
       names = s.split(/\s/)
       if names.size > 1
-        joins(:directors).where("directors.firstname like '%" + names.first + "%' OR directors.lastname LIKE '%" + names[1] + "%'")
+        joins(:directors).where("directors.firstname like '%" + names.first + "%' OR directors.lastname LIKE '%" + names[1] + "%'").uniq
       end
     else
-      joins(:directors).where("directors.firstname like '%" + s + "%' OR directors.lastname LIKE '%" + s + "%'")
+      joins(:directors).where("directors.firstname like '%" + s + "%' OR directors.lastname LIKE '%" + s + "%'").uniq
     end
-  end
+  }
 
 
   

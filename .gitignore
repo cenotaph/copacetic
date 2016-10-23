@@ -46,3 +46,4 @@ config/deploy/*
 config/deploy.rb
 Capfile
 config/development.sphinx.conf
+public/uploads/*

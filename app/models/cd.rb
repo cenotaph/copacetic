@@ -18,13 +18,11 @@ class Cd < ActiveRecord::Base
     joins(:items_specials).where("items_specials.item_type = 'Cd'  and items_specials.special_id = ?", s)
   end 
   
- scope :by_publisher, ->(s) { joins(:publisher).where("cds.publisher_id = ?", s) }
-      
-  def self.by_creator(s)
-    where("artist like '%" + s + "%'")
-  end
-  
+ scope :by_publisher, ->(s) { joins(:publisher).where("cds.publisher_id = ?", s).uniq }
+ scope :by_creator, ->(s) { where("artist like '%" + s + "%'").uniq }
+ scope :by_artist, ->(s) { where("artist like '%" + s + "%'").uniq }
 
+  
   def sanitise
     self.shortdesc = Sanitize.clean(self.shortdesc,  :elements => ['b', 'em', 'strong', 'a', 'u'], :attributes => {'a' => ['href', 'target', 'title']}, :protocols => {'a' => {'href' => ['http', 'mailto']}} )
 #    self.description = Sanitize.clean(self.description,  :elements => ['b', 'em', 'strong', 'a', 'u'], :attributes => {'a' => ['href']}, :protocols => {'a' => {'href' => ['http', 'mailto']}} ) 
