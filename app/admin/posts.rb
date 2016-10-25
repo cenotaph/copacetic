@@ -16,7 +16,7 @@ ActiveAdmin.register Post do
     end
     
     def permitted_params
-      params.permit(:post  => [:title, :body, :admin_user_id, :slug])
+      params.permit(:post  => [:title, :body, :published, :admin_user_id, :slug])
       # params.permit! # allow all parameters
     end
 
