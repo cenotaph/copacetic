@@ -11,7 +11,7 @@ class SearchesController < ApplicationController
     #   other_items = creators_and_directors.map(&:items).uniq
     # end
 
-    @items = Kaminari.paginate_array([@items, other_items].flatten.compact.uniq).page(params[:page]).per(32)
+    @items = Kaminari.paginate_array(@items).page(params[:page]).per(32)
     render 'shared/search_results'
   end
   
