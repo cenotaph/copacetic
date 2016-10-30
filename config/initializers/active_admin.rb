@@ -195,6 +195,7 @@ ActiveAdmin.setup do |config|
 
   config.register_javascript 'autocomplete-rails.js'
   config.register_javascript 'ckeditor/init.js'
+  config.register_javascript 'jquery_nested_form.js'
   # config.register_javascript 'ckeditor/ckeditor.js'
 
   # == CSV options
