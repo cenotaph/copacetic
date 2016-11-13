@@ -22,7 +22,7 @@ ActiveAdmin.register Comic do
     def permitted_params
       params.permit(:comic => [:title, :issue, :publisher_id, :listprice, :price, :dateadded, :instock, :description, :pagecount, 
         :dimensions, :numbersold, :image, :shortdesc, :tinydesc, :include_front_grid, :justin_id, :weight, :slug,
-      :remove_image, serials_ids: [], special_ids: [], creators_attributes: [:firstname, :lastname, :_destroy, :id]])
+      :remove_image, serial_ids: [], special_ids: [], creators_attributes: [:firstname, :lastname, :_destroy, :id]])
       # params.permit! # allow all parameters
     end
 

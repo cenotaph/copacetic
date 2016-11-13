@@ -92,9 +92,9 @@ class Cd < ActiveRecord::Base
      if self.artist.nil?
        return ""
      else
-       others = Cd.find_all_by_artist(self.artist, :order => 'cds.id DESC').delete_if{
+       others = Cd.where(artist: self.artist).order(id: :desc).to_a.delete_if{
             |x| x == self }
-       others += Cd.find(:all, :include => :label, :conditions => ['label_id = ?', self.label.id], :order => "cds.id DESC")
+       others += Cd.includes(:label).where(['label_id = ?', self.label.id]).order(id: :desc)
        
        
        return others.delete_if{|x| x == self }.sort{|x,y| y.id <=> x.id}.uniq

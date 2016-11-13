@@ -10,7 +10,7 @@ ActiveAdmin.register Publisher do
     end
     
     def permitted_params
-      params.permit(:published => [:name, :description, :tinydesc, :keywords, :slug])
+      params.permit(:publisher => [:name, :description, :tinydesc, :keywords, :slug])
       # params.permit! # allow all parameters
     end
 

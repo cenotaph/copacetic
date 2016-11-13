@@ -5,7 +5,7 @@
     - else
       All
       = items.first.class.to_s.pluralize
-    %span.small_link= link_to '(options)', "javascript:$('.filters').slideToggle();"
+    %span.small_link= link_to '(options)', "#" , onClick: "javascript:$('.filters').slideToggle();return false;"
   .small-6.columns.text-right= paginate items, :remote => true
 .filters{:style => ( (params[:by_special].blank? && params[:by_serial].blank? && params[:by_label].blank? && params[:by_creator].blank? && params[:by_publisher].blank?) ?   "display: none" : "")}
   .row.expanded

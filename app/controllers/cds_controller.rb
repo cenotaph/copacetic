@@ -43,7 +43,7 @@ class CdsController < ApplicationController
    end
    
   def show
-    @item = Cd.find(params[:id])
+    @item = Cd.friendly.find(params[:id])
     set_meta_tags :title => @item.display_title    
     render :template => 'shared/show'
   end
