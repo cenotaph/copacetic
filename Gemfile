@@ -61,7 +61,8 @@ gem 'nokogiri'
 gem 'omniauth-facebook'
 gem 'rails-jquery-autocomplete'
 gem 'randumb'
-
+gem 'redis-rails', '~> 5.0.1'
+gem 'redis'
 # gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 
 gem 'thinking-sphinx', '~> 3.2.0'

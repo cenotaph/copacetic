@@ -19,12 +19,13 @@
             %ul.small-up-1.medium-up-2
               - group.each_with_index do |item, index|
                 - next if item.nil?
-                %li.justin_slide.column{class: index == 1 ? 'show-for-large' : false }
-                  .scroll_image= image_tag item.image_url(:index)
-                  .scroll_metadata
-                    .scroll_title= link_to item.title, item
-                    .scroll_author= raw item.authorship_short
-                    .scroll_price= number_to_currency(item.price)
+                - cache ['justin_sidebar', item] do
+                  %li.justin_slide.column{class: index == 1 ? 'show-for-large' : false }
+                    .scroll_image= image_tag item.image_url(:index)
+                    .scroll_metadata
+                      .scroll_title= link_to item.title, item
+                      .scroll_author= raw item.authorship_short
+                      .scroll_price= number_to_currency(item.price)
   .small-12.columns
     %strong= link_to 'See all recent arrivals...', '/just_in'
 

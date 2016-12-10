@@ -1,81 +1,82 @@
-.row.expanded
-  .small-6.medium-4.columns.text-right
-    - if @item.image?
-      .item_image= image_tag @item.image.url(:medium)
-    - unless @item.price.blank?
-      .itemspecials= copacetic_price(@item)
+- cache @item do
+  .row.expanded
+    .small-6.medium-4.columns.text-right
+      - if @item.image?
+        .item_image= image_tag @item.image.url(:medium)
+      - unless @item.price.blank?
+        .itemspecials= copacetic_price(@item)
 
-      - if @item.instock == true
-        %form{:action => "https://www.paypal.com/cgi-bin/webscr", :method => "post", :target => "paypal"}
-          %input{:alt => "Make payments with PayPal - it's fast, free and secure!", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_cart_SM.gif", :type => "image"}/
-          %img{:alt => "", :border => "0", :height => "1", :src => "https://www.paypal.com/en_US/i/scr/pixel.gif", :width => "1"}/
-          %input{:name => "add", :type => "hidden", :value => "1"}/
-          %input{:name => "cmd", :type => "hidden", :value => "_cart"}/
-          %input{:name => "business", :type => "hidden", :value => "order@copaceticcomics.com  "}/
-          %input{:name => "item_name", :type => "hidden", :value => "#{h @item.display_title} by #{strip_links(@item.authorship)}"}
-          %input{:name => "amount", :type => "hidden", :value => number_to_currency(@item.price)}
-          %input{:name => "no_shipping", :type => "hidden", :value => "2"}/
-          %input{:name => "return", :type => "hidden", :value => "http://www.copaceticcomics.com"}/
-          %input{:name => "cancel_return", :type => "hidden", :value => "http://www.copaceticcomics.com"}/
-          %input{:name => "no_note", :type => "hidden", :value => "1"}/
-          %input{:name => "currency_code", :type => "hidden", :value => "USD"}/
-          %input{:name => "weight", :type => "hidden", :value => @item.weight}/
-          %input{:name => "weight_unit", :type => "hidden", :value => "lbs"}/
-          %input{:name => "lc", :type => "hidden", :value => "US"}/
-          %input{:name => "bn", :type => "hidden", :value => "PP-ShopCartBF"}/
+        - if @item.instock == true
+          %form{:action => "https://www.paypal.com/cgi-bin/webscr", :method => "post", :target => "paypal"}
+            %input{:alt => "Make payments with PayPal - it's fast, free and secure!", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_cart_SM.gif", :type => "image"}/
+            %img{:alt => "", :border => "0", :height => "1", :src => "https://www.paypal.com/en_US/i/scr/pixel.gif", :width => "1"}/
+            %input{:name => "add", :type => "hidden", :value => "1"}/
+            %input{:name => "cmd", :type => "hidden", :value => "_cart"}/
+            %input{:name => "business", :type => "hidden", :value => "order@copaceticcomics.com  "}/
+            %input{:name => "item_name", :type => "hidden", :value => "#{h @item.display_title} by #{strip_links(@item.authorship)}"}
+            %input{:name => "amount", :type => "hidden", :value => number_to_currency(@item.price)}
+            %input{:name => "no_shipping", :type => "hidden", :value => "2"}/
+            %input{:name => "return", :type => "hidden", :value => "http://www.copaceticcomics.com"}/
+            %input{:name => "cancel_return", :type => "hidden", :value => "http://www.copaceticcomics.com"}/
+            %input{:name => "no_note", :type => "hidden", :value => "1"}/
+            %input{:name => "currency_code", :type => "hidden", :value => "USD"}/
+            %input{:name => "weight", :type => "hidden", :value => @item.weight}/
+            %input{:name => "weight_unit", :type => "hidden", :value => "lbs"}/
+            %input{:name => "lc", :type => "hidden", :value => "US"}/
+            %input{:name => "bn", :type => "hidden", :value => "PP-ShopCartBF"}/
 
-      - else
-        %p
-          %span{:style => "color: RED; font-size: 0.8em;"} OUT OF STOCK!
-  .small-6.medium-8.columns.text-left
-    .item_metadata.columns
-      .item_title
-        = @item.display_title
-        - if current_admin_user
-          = link_to 'Edit this entry!', "/admin/#{@item.class.to_s.tableize}/#{@item.id}/edit", :style => 'padding-left: 15px;', class: [:button, :tiny]
-      .item_author= raw @item.authorship
-      - unless @item.issuer_credit.blank?
-        .item_issuer= @item.issuer_credit
-      .itemshowdesc= sanitize(get_description(@item), :tags => %w{bold b strong em i u br p a },  :attributes => %w{href target})
+        - else
+          %p
+            %span{:style => "color: RED; font-size: 0.8em;"} OUT OF STOCK!
+    .small-6.medium-8.columns.text-left
+      .item_metadata.columns
+        .item_title
+          = @item.display_title
+          - if current_admin_user
+            = link_to 'Edit this entry!', "/admin/#{@item.class.to_s.tableize}/#{@item.id}/edit", :style => 'padding-left: 15px;', class: [:button, :tiny]
+        .item_author= raw @item.authorship
+        - unless @item.issuer_credit.blank?
+          .item_issuer= @item.issuer_credit
+        .itemshowdesc= sanitize(get_description(@item), :tags => %w{bold b strong em i u br p a },  :attributes => %w{href target})
   
 
-      - unless @item.specials.empty?
-        .itemspecials
-          This item belongs to the categories:
-          = raw @item.specials.collect{|x| link_to(x.name, x)}.join(', ')
-    
-      - if @item.respond_to?('serials')
-        - unless @item.serial_name.blank? || @item.serial_name =~ /no serial/
+        - unless @item.specials.empty?
           .itemspecials
-            This item is part of the series: 
-            = raw @item.serials.collect{|x| link_to(x.name, x)}.join(', ')
+            This item belongs to the categories:
+            = raw @item.specials.collect{|x| link_to(x.name, x)}.join(', ')
+    
+        - if @item.respond_to?('serials')
+          - unless @item.serial_name.blank? || @item.serial_name =~ /no serial/
+            .itemspecials
+              This item is part of the series: 
+              = raw @item.serials.collect{|x| link_to(x.name, x)}.join(', ')
       
 
   
-- if @item.respond_to?('others')
-  .row.expanded
-    .small-12.columns
-      - if @item.others.size > 0
-        = render :partial => 'shared/others', :locals => {:item => @item}
-  .row.expanded
-    .small-12.columns
-      .others_header
-        Discuss
-        %em= @item.display_title
-        on Facebook:
-      #fb-root
-  .row.expanded
-    .small-12.columns
-      .fb-comments{"data-href" => 'http://' + request.host + url_for(@archive), "data-num-posts" => "5", "data-width" => "760"} 
-      .share_this
-        = share_this(@item)   
-        %a{:href => "http://www.tumblr.com/share", :style => "display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('http://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent;", :title => "Share on Tumblr"} Share on Tumblr
-= content_for :jquery do
-  :plain
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=361608853869521";
-      fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+  - if @item.respond_to?('others')
+    .row.expanded
+      .small-12.columns
+        - if @item.others.size > 0
+          = render :partial => 'shared/others', :locals => {:item => @item}
+    .row.expanded
+      .small-12.columns
+        .others_header
+          Discuss
+          %em= @item.display_title
+          on Facebook:
+        #fb-root
+    .row.expanded
+      .small-12.columns
+        .fb-comments{"data-href" => 'http://' + request.host + url_for(@archive), "data-num-posts" => "5", "data-width" => "760"} 
+        .share_this
+          = share_this(@item)   
+          %a{:href => "http://www.tumblr.com/share", :style => "display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('http://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent;", :title => "Share on Tumblr"} Share on Tumblr
+  = content_for :jquery do
+    :plain
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=361608853869521";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));

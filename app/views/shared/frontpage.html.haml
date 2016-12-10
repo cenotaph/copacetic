@@ -1,35 +1,36 @@
-.row.expanded
-  .small-12.medium-12.columns.blue_green_box.smaller.text-center
+- cache @frontitems do
+  .row.expanded
+    .small-12.medium-12.columns.blue_green_box.smaller.text-center
 
-    = link_to 'IMAGE + TEXT', comics_path
-    = raw "&sdot;"
-    = link_to "SOUND", cds_path
-    = raw " + "
-    = link_to "VISION", dvds_path
-    = raw " &sdot;"
-    = link_to " ART + LITERATURE", special_path('copacetic-select')
+      = link_to 'IMAGE + TEXT', comics_path
+      = raw "&sdot;"
+      = link_to "SOUND", cds_path
+      = raw " + "
+      = link_to "VISION", dvds_path
+      = raw " &sdot;"
+      = link_to " ART + LITERATURE", special_path('copacetic-select')
 
-.row.expanded
-  - @frontitems.each do |frontitem|
+  .row.expanded
+    - @frontitems.each do |frontitem|
+      - cache frontitem do
+        .front_grid.small-4.medium-3.large-2.columns
+          = link_to(image_tag(frontitem.item.image_url(:frontgrid)), frontitem.item)
 
-    .front_grid.small-4.medium-3.large-2.columns
-      = link_to(image_tag(frontitem.item.image_url(:frontgrid)), frontitem.item)
 
+  .row.expanded
+    .small-12.medium-12.columns.blue_green_box.smaller.text-center
+      = link_to 'art', special_path('copacetic-select')
+      = raw "&sdot;"
+      = link_to 'books', books_path
+      = raw "&sdot;"
+      = link_to 'comics', comics_path
 
-.row.expanded
-  .small-12.medium-12.columns.blue_green_box.smaller.text-center
-    = link_to 'art', special_path('copacetic-select')
-    = raw "&sdot;"
-    = link_to 'books', books_path
-    = raw "&sdot;"
-    = link_to 'comics', comics_path
-
-    = raw "&sdot;"
-    = link_to 'dvds', dvds_path
-    = raw "&mdash;"
-    = link_to 'cds', cds_path
-    = raw "&sdot;"  
-    = link_to 'etc', special_path('copacetic-select')
+      = raw "&sdot;"
+      = link_to 'dvds', dvds_path
+      = raw "&mdash;"
+      = link_to 'cds', cds_path
+      = raw "&sdot;"  
+      = link_to 'etc', special_path('copacetic-select')
 
 
 .row.expanded.front_content

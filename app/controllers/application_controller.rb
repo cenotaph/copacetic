@@ -8,48 +8,7 @@ class ApplicationController < ActionController::Base
   helper :all
   # include AuthenticatedSystem
   include ActionView::Helpers::SanitizeHelper
-  
-   # def login_required
-   #     if session[:user]
-   
-   #       return true
-   #     end
-   #     flash[:warning]='Please login to continue'
-   #     session[:return_to]=request.request_uri
-   #     redirect_to :controller => "user", :action => "login"
-   #     return false 
-   #   end
-   # 
-   #   def current_user
-   #     session[:user]
-   #   end
-   # 
-   #   def redirect_to_stored
-   #     if return_to = session[:return_to]
-   #       session[:return_to]=nil
-   #       redirect_to (return_to)
-   #     else
-   #       redirect_to :controller=>'user', :action=>'welcome'
-   #     end
-   #   end
-   #   
-   #   def paginate_by_sql(model, sql, per_page, options={})
-   #       if options[:count]
-   #           if options[:count].is_a? Integer
-   #               total = options[:count]
-   #           else
-   #               total = model.count_by_sql(options[:count])
-   #           end
-   #       else
-   #           total = model.count_by_sql_wrapping_select_query(sql)
-   #       end
-   # 
-   #       object_pages = Paginator.new self, total, per_page,
-   #            @params['page']
-   #       objects = model.find_by_sql_with_limit(sql,
-   #            object_pages.current.to_sql[1], per_page)
-   #       return [object_pages, objects]
-   #    end
+
    
    def frontpage
      @frontitems = Frontitem.all.order(:position)
