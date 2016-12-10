@@ -1,8 +1,11 @@
-class SerialsController < InheritedResources::Base
-  actions :show, :index
+class SerialsController < ApplicationController
+  
+  def index
+    @serials = Serial.all.page(params[:page]).per(32)  
+  end
   
   def show
-    @item = Serial.find(params[:id])
+    @item = Serial.friendly.find(params[:id])
     if request.path != serial_path(@item)
       return redirect_to @item, :status => :moved_permanently
     end

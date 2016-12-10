@@ -1,12 +1,9 @@
-- if @item.class == Justin
-  .item_title
-    Latest arrivals for:
-    = collection_select :item, :slug, Justin.published.order('day DESC'), :slug, :name, {}, { :onchange => "document.location.href='/just_in/' + $(this).val()"}
-- else
-  - if controller.action_name != 'by_artist'
-    .item_title= @item.display_title
-    - unless @item.description.nil?
-      .item_description= raw(sanitize(@item.description, :tags => ['strong', 'b', 'p', 'i', 'em', 'a', 'img']))
+
+
+- if controller.action_name != 'by_artist'
+  .item_title= @item.display_title
+  - unless @item.description.nil?
+    .item_description= raw(sanitize(@item.description, :tags => ['strong', 'b', 'p', 'i', 'em', 'a', 'img']))
 - if controller.action_name == 'by_artist'
   .item_title= @items.first.artist
 .filters.paginator
@@ -15,6 +12,12 @@
   /.change_link= link_to '(change)', '#', :onclick => "$('.outofstock').fadeToggle(); $('.toggle').html($('.toggle').html() == 'Showing in stock items' ? 'Showing all items, including out of stock' : 'Showing in stock items');"
 #items.row.expanded{:style => "clear: both"}= render :partial => 'shared/belongs_to', :locals => {:items => @items}
 .paginator{:style => "clear: left"}= paginate @items, :remote => true
+
+- if @item.class == Justin
+  .item_title
+    And there's plenty more!  Browse our month-by-month “Just In” archives: 
+    = collection_select :item, :slug, Justin.published.order('day DESC'), :slug, :name, {}, { :onchange => "document.location.href='/just_in/' + $(this).val()"}
+    
 :javascript
   $('.pagination a').on('click', function(e) {
     $('.paginator').html("<center><img src=\"/images/horizontal-loader.gif\"></center>");

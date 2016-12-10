@@ -804,6 +804,7 @@ tr.search_0 {
 .index_description {
   font-size: 12px;
   line-height: 16px;
+  padding-bottom: 2rem;
 }
 
 .index_metadata {
@@ -830,6 +831,7 @@ span.small_link {
   padding: 2px;
   background-color: #edffed;
   border-bottom: 5px solid $blue;
+  margin-bottom: 1rem;
   &#pagination, &#pbottom {
     border-bottom: none;
   }

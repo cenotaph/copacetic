@@ -5,4 +5,3 @@ class Ckeditor::Asset < ActiveRecord::Base
 
   validates :data, presence: true
 end
-Rails.application.config.assets.precompile += %w(ckeditor/config.js)

@@ -1,16 +1,18 @@
-%h1 Listing serials
+%h1 Serial titles
 %table
-  %tr
-    - for column in Serial.content_columns
-      %th= column.human_name
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th &nbsp;
+    
   - for serial in @serials
     %tr{:class => cycle('odd', 'even')}
       %td= h serial.name
       %td
         - unless serial.description.blank?
-          = truncate_words(serial.description)
-      %td= link_to 'Show', :action => 'show', :id => serial
-      %td= link_to 'Edit', :action => 'edit', :id => serial
-      %td= link_to 'Destroy', { :action => 'destroy', :id => serial }, :confirm => 'Are you sure?', :method => :post
-= will_paginate @serials
+          = raw truncate_words(serial.description)
+      %td= link_to 'Show', :action => 'show', :id => serial, class: [:button]
+
+= paginate @serials
 = link_to 'New serial', :action => 'new'

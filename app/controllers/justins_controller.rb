@@ -11,7 +11,7 @@ class JustinsController < InheritedResources::Base
   end
   
   def show
-    @item = Justin.find(params[:id])
+    @item = Justin.friendly.find(params[:id])
     @items = Kaminari.paginate_array(@item.items).page(params[:page]).per(32)       
     respond_to do |format|
       format.html { render :template => 'shared/belongs_to' }
