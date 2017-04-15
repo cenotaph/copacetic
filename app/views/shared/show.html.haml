@@ -14,7 +14,7 @@
             %input{:name => "cmd", :type => "hidden", :value => "_cart"}/
             %input{:name => "business", :type => "hidden", :value => "order@copaceticcomics.com"}/
             %input{:name => "item_name", :type => "hidden", :value => "#{h @item.display_title} by #{strip_links(@item.authorship)}"}
-            %input{:name => "amount", :type => "hidden", :value => number_to_currency(@item.price)}
+            %input{:name => "amount", :type => "hidden", :value => number_to_currency(@item.price, :unit => "").strip}
             %input{:name => "no_shipping", :type => "hidden", :value => "2"}/
             %input{:name => "return", :type => "hidden", :value => "http://www.copaceticcomics.com"}/
             %input{:name => "cancel_return", :type => "hidden", :value => "http://www.copaceticcomics.com"}/
