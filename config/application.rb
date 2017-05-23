@@ -15,7 +15,8 @@ module Copacetic
     config.assets.precompile += Ckeditor.assets
   
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-    config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 12.hours }
+    # config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 12.hours }
+    config.cache_store = :mem_cache_store
 
    # actionmailer
   # Disable delivery errors, bad email addresses will be ignored
