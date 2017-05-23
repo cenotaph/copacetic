@@ -152,6 +152,7 @@ GEM
       countries (~> 1.2.0)
       sort_alphabetical (~> 1.0)
     currencies (0.4.2)
+    dalli (2.7.6)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -418,6 +419,7 @@ DEPENDENCIES
   ckeditor!
   coffee-rails (~> 4.2)
   country_select
+  dalli
   devise
   figaro
   formtastic
