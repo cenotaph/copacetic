@@ -11,7 +11,7 @@ class Dvd < ActiveRecord::Base
   belongs_to :justin
   accepts_nested_attributes_for :directors, :allow_destroy => true, :reject_if => lambda { |a| a[:firstname].blank? }
   accepts_nested_attributes_for :specials
-  has_one :frontitem, :as => :item
+  has_one :frontitem, :as => :item, dependent: :destroy
   extend FriendlyId
   friendly_id :title,  :use => :slugged  
   validates_presence_of :title

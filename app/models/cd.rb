@@ -1,6 +1,6 @@
 class Cd < ActiveRecord::Base
   paginates_per 32
-  has_one :frontitem, :as => :item
+  has_one :frontitem, :as => :item, dependent: :destroy
   belongs_to :label
   has_many :specials, :through => :items_specials
   has_many :items_specials, :as => :item

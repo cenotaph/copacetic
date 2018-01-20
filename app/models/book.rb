@@ -2,7 +2,7 @@ class Book < ActiveRecord::Base
   paginates_per 32
   extend FriendlyId
   friendly_id :title_with_issue, use: :slugged
-  has_one :frontitem, :as => :item  
+  has_one :frontitem, :as => :item, dependent: :destroy
   belongs_to :publisher
   validates_presence_of :publisher_id
   

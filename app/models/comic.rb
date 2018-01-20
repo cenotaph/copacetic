@@ -4,7 +4,7 @@ class Comic < ActiveRecord::Base
   has_many :creators, :through => :items_creators
   has_many :items_creators, :as => :item, :dependent => :delete_all
   belongs_to :justin
-  has_one :frontitem, :as => :item
+  has_one :frontitem, :as => :item, dependent: :destroy
   
   extend FriendlyId
   friendly_id :title_with_issue,  :use => :slugged
@@ -14,7 +14,7 @@ class Comic < ActiveRecord::Base
   
   has_many :items_specials, :as => :item
   
-  has_one :frontitem, :as => :item
+
   belongs_to :publisher
   validates_presence_of :publisher
   # has_and_belongs_to_many :comments, :join_table => 'comments_comics'
