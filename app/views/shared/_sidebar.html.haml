@@ -38,22 +38,14 @@
     .paypal
       %strong= link_to 'Follow us on Instagram', 'https://www.instagram.com/copaceticcomics/'
 
-%iframe{:class => :btn, :frameborder => 0, :border => 0, :scrolling => :no, :allowtransparency => true, :height => 25, :width => 157, style: 'margin-left: 1rem', :src =>  "https://platform.tumblr.com/v1/follow_button.html?button_type=1&tumblelog=copcomco&color_scheme=light"}
+-# %iframe{:class => :btn, :frameborder => 0, :border => 0, :scrolling => :no, :allowtransparency => true, :height => 25, :width => 157, style: 'margin-left: 1rem', :src =>  "https://platform.tumblr.com/v1/follow_button.html?button_type=1&tumblelog=copcomco&color_scheme=light"}
 
-.fb-like-box{"data-href" => "https://www.facebook.com/pages/The-Copacetic-Comics-Company/132379686783143",  "data-width" => "230", "data-show-faces" => "true", "data-stream" => "false",  "data-header" => "false", style: 'margin-left: 1rem'}
+-# .fb-like-box{"data-href" => "https://www.facebook.com/pages/The-Copacetic-Comics-Company/132379686783143",  "data-width" => "230", "data-show-faces" => "true", "data-stream" => "false",  "data-header" => "false", style: 'margin-left: 1rem'}
 
 .row.expanded
   .small-12.columns
     .sidebar_title.smaller Visit our building mates at 3138 Dobson:
     %ul
-    %li= link_to 'Lili Coffee', 'http://www.facebook.com/pages/Lili-CoffeeShop/135261526501378'
+    %li= link_to 'Kaibur Coffee', 'https://www.kaiburcoffee.com/'
     %li= link_to 'Cruel Noise Records', 'https://www.facebook.com/CruelNoiseRecords/'
-= content_for :jquery do
-  :plain
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=258774570894773";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+

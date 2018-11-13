@@ -58,25 +58,5 @@
       .small-12.columns
         - if @item.others.size > 0
           = render :partial => 'shared/others', :locals => {:item => @item}
-    .row.expanded
-      .small-12.columns
-        .others_header
-          Discuss
-          %em= @item.display_title
-          on Facebook:
-        #fb-root
-    .row.expanded
-      .small-12.columns
-        .fb-comments{"data-href" => 'http://' + request.host + url_for(@archive), "data-num-posts" => "5", "data-width" => "760"} 
-        .share_this
-          = share_this(@item)   
-          %a{:href => "http://www.tumblr.com/share", :style => "display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('http://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent;", :title => "Share on Tumblr"} Share on Tumblr
-  = content_for :jquery do
-    :plain
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=361608853869521";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+
+

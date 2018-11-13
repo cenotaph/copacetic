@@ -2,7 +2,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery-ui/autocomplete
+//= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 //= require ckeditor/init
 //= require jquery_nested_form

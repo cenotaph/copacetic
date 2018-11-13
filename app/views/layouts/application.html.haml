@@ -7,7 +7,7 @@
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     = csrf_meta_tags
-    %meta{:property => "fb:app_id", :content => (Rails.env == 'development' ? "361608853869521" : "248448965247367")}  
+
     = display_meta_tags :site => 'The Copacetic Comics Company'
     - if current_admin_user.nil?
       :javascript
