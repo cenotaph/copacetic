@@ -6,7 +6,7 @@
         = text_field_tag("query", params[:query], :autocomplete => "off", :size => 15 )
         = submit_tag "search!"
 
-    - if controller.action_name == 'frontpage'    
+    - if controller.action_name == 'frontpage'
       .sidebar_title.clear_top Visit us!
       = raw Article.friendly.find('about-us').blurb
 .row.expanded.just_in
@@ -33,7 +33,7 @@
   .small-12.columns
     .sidebar_title.clear_top= link_to 'Copacetica', '/copacetica'
     Edifiying essays about all things Copacetic
- 
+
     .paypal= image_tag image_path('paypal.gif')
     .paypal
       %strong= link_to 'Follow us on Instagram', 'https://www.instagram.com/copaceticcomics/'
