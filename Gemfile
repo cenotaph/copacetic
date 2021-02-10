@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
-ruby '2.5.1'
+ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.7'
 gem 'mysql2'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 5.0'
 
 gem 'haml'
 gem "haml-rails", "~> 0.9"
@@ -37,7 +37,7 @@ gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano3-puma'
 
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '2.0.0'# github: 'activeadmin'
 
 gem 'cancancan'
 gem 'carrierwave'
@@ -47,11 +47,12 @@ gem 'country_select'
 gem 'dalli'
 gem 'devise'
 gem 'figaro'
-gem 'formtastic'
+gem 'formtastic', '3.1.5'
 gem 'foundation-rails', '6.2.3.0'
-gem 'friendly_id', '~> 5.1.0'
-gem 'has_scope'
-gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'friendly_id' #, '~> 5.1.0'
+gem 'has_scope', '0.7.2'
+gem 'actionpack', '5.0.7'
+gem 'inherited_resources', '1.9.0' # github: 'activeadmin/inherited_resources'
 gem 'kaminari'
 gem 'meta-tags'
 gem 'mini_magick'
