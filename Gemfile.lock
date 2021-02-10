@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/galetahub/ckeditor.git
-  revision: f9e48420ccb6dc99f4453397554a6ae60bc2274b
-  specs:
-    ckeditor (5.1.0)
-      orm_adapter (~> 0.5.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -125,6 +118,12 @@ GEM
     carrierwave-aws (1.5.0)
       aws-sdk-s3 (~> 1.0)
       carrierwave (~> 2.0)
+    ckeditor (4.2.4)
+      cocaine
+      orm_adapter (~> 0.5.0)
+    climate_control (0.2.0)
+    cocaine (0.6.0)
+      terrapin (= 0.6.0)
     coderay (1.1.3)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -407,6 +406,8 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     ssrf_filter (1.0.7)
+    terrapin (0.6.0)
+      climate_control (>= 0.0.3, < 1.0)
     thinking-sphinx (3.2.0)
       activerecord (>= 3.1.0)
       builder (>= 2.1.2)
@@ -468,7 +469,7 @@ DEPENDENCIES
   capistrano3-puma
   carrierwave
   carrierwave-aws
-  ckeditor!
+  ckeditor (= 4.2.4)
   coffee-rails (~> 4.2)
   country_select
   dalli
