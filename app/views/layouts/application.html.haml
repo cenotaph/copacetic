@@ -8,7 +8,7 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     = csrf_meta_tags
 
-    = display_meta_tags :site => 'The Copacetic Comics Company'
+    = display_meta_tags site: 'The Copacetic Comics Company'
     - if current_admin_user.nil?
       :javascript
         var _gaq = _gaq || [];
