@@ -6,7 +6,7 @@ gem 'rails', '5.0.7'
 gem 'mysql2'
 
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.3'
 
 gem 'haml'
 gem "haml-rails", "~> 0.9"
